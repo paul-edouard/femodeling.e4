@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_QGNSYEzsEeKSfMlYd9VGyg" elementId="de.femodeling.e4.client.application">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_WddIUEzsEeKSfMlYd9VGyg" elementId="de.femodeling.e4.client.trimmedwindow" label="Fe Modeling" x="100" y="100" width="400" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_xdubQEztEeKSfMlYd9VGyg" elementId="de.femodeling.e4.client.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_zhS1gEztEeKSfMlYd9VGyg" elementId="de.femodeling.e4.client.perspective.common" label="Common">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_KbFykE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partsashcontainer.0" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_bGKowE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.left" containerData="40">
+            <children xsi:type="basic:Part" xmi:id="__15DkE0BEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.part.projects" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.ui.parts.ProjectsPart" label="Projects" iconURI="platform:/plugin/de.femodeling.e4.client/icons/folder_database.png"/>
+          </children>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_iEwLgE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partsashcontainer.rigth" containerData="60">
+            <children xsi:type="basic:PartStack" xmi:id="_pBsvgE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.rightup"/>
+            <children xsi:type="basic:PartStack" xmi:id="_to49EE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.rightdown"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_ocmKcE0YEeKZuOhQr5Q8YQ" elementId="de.femodeling.e4.client.menu.0">
+      <children xsi:type="menu:Menu" xmi:id="_qfIp8E0YEeKZuOhQr5Q8YQ" elementId="de.femodeling.e4.client.menu.file" label="File">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_xZi3UE0YEeKZuOhQr5Q8YQ" elementId="de.femodeling.e4.client.handledmenuitem.exit" iconURI="platform:/plugin/de.femodeling.e4.client/icons/cross.png" command="_Vh4M4E0YEeKZuOhQr5Q8YQ"/>
+      </children>
+    </mainMenu>
+  </children>
+  <handlers xmi:id="_ZzUM4E0YEeKZuOhQr5Q8YQ" elementId="de.femodeling.e4.client.handler.exit" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.handlers.ExitHandler" command="_Vh4M4E0YEeKZuOhQr5Q8YQ"/>
+  <commands xmi:id="_Vh4M4E0YEeKZuOhQr5Q8YQ" elementId="org.eclipse.ui.file.exit" commandName="Exit" description="Exit the application"/>
+  <addons xmi:id="_QGNSYUzsEeKSfMlYd9VGyg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_QGNSYkzsEeKSfMlYd9VGyg" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_QGNSY0zsEeKSfMlYd9VGyg" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_QGNSZEzsEeKSfMlYd9VGyg" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_QGNSZUzsEeKSfMlYd9VGyg" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_QGNSZkzsEeKSfMlYd9VGyg" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>
