@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model
+Bundle-SymbolicName: de.femodeling.e4.model
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.apache.log4j;bundle-version="1.2.14"
+Export-Package: de.femodeling.e4.model.core,
+ de.femodeling.e4.model.core.assembly,
+ de.femodeling.e4.model.core.connection,
+ de.femodeling.e4.model.core.part,
+ de.femodeling.e4.model.dto,
+ de.femodeling.e4.model.xml

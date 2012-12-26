@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Util
+Bundle-SymbolicName: de.femodeling.e4.util
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.apache.log4j;bundle-version="1.2.14",
+ de.femodeling.e4.model;bundle-version="1.0.0"
+Export-Package: de.femodeling.e4.util,
+ de.femodeling.e4.util.file,
+ de.femodeling.e4.util.vpmtree
