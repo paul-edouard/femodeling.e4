@@ -2,7 +2,7 @@ package de.femodeling.e4.server.service.dao;
 
 import java.util.Set;
 
-import de.femodeling.e4.internal.model.LockableEntityServerImpl;
+import de.femodeling.e4.server.internal.model.LockableEntityServerImpl;
 
 
 public interface LockableEntityDAOIF {

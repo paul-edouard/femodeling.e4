@@ -1,8 +1,8 @@
 package de.femodeling.e4.server.service.transform;
 
-import de.femodeling.e4.internal.model.AssemblyServerImpl;
 import de.femodeling.e4.model.dto.AssemblyDTO;
 import de.femodeling.e4.model.dto.AssemblyDTOImpl;
+import de.femodeling.e4.server.internal.model.AssemblyServerImpl;
 
 
 

@@ -9,9 +9,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.femodeling.e4.internal.model.LockableEntityServerImpl;
 import de.femodeling.e4.model.xml.XmlFile;
 //import org.apache.log4j.Logger;
+import de.femodeling.e4.server.internal.model.LockableEntityServerImpl;
 
 
 public class LockableEntityDAOImpl extends XmlFile implements LockableEntityDAOIF {

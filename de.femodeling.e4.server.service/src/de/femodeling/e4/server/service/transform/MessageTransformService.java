@@ -1,8 +1,5 @@
 package de.femodeling.e4.server.service.transform;
 
-import de.femodeling.e4.internal.model.MessageServerImpl;
-import de.femodeling.e4.internal.model.PartServerImpl;
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.core.LockableEntity;
 import de.femodeling.e4.model.core.Message;
 import de.femodeling.e4.model.dto.LockableEntityDTO;
@@ -10,6 +7,9 @@ import de.femodeling.e4.model.dto.MessageDTO;
 import de.femodeling.e4.model.dto.MessageDTOImpl;
 import de.femodeling.e4.model.dto.PartDTO;
 import de.femodeling.e4.model.dto.ProjectDTO;
+import de.femodeling.e4.server.internal.model.MessageServerImpl;
+import de.femodeling.e4.server.internal.model.PartServerImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 
 
 public class MessageTransformService {

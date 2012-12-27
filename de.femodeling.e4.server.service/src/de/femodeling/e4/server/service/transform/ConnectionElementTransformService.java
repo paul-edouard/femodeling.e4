@@ -3,9 +3,9 @@ package de.femodeling.e4.server.service.transform;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.femodeling.e4.internal.model.ConnectionElementServerImpl;
 import de.femodeling.e4.model.dto.ConnectionElementDTO;
 import de.femodeling.e4.model.dto.ConnectionElementDTOImpl;
+import de.femodeling.e4.server.internal.model.ConnectionElementServerImpl;
 
 public class ConnectionElementTransformService {
 	

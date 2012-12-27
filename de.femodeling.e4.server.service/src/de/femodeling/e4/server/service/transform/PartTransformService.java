@@ -3,9 +3,9 @@ package de.femodeling.e4.server.service.transform;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.femodeling.e4.internal.model.PartServerImpl;
 import de.femodeling.e4.model.dto.PartDTO;
 import de.femodeling.e4.model.dto.PartDTOImpl;
+import de.femodeling.e4.server.internal.model.PartServerImpl;
 
 
 public class PartTransformService {

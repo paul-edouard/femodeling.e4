@@ -7,7 +7,7 @@
  * This program and the accompanying materials are proprietary information
  * of Paul-Edouard Munch. Use is subject to license terms.
  */
-package de.femodeling.e4.internal.exception;
+package de.femodeling.e4.server.internal.exception;
 
 import org.apache.log4j.Logger;
 import org.springframework.aop.ThrowsAdvice;

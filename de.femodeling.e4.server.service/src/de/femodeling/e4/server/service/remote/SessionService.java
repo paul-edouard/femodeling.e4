@@ -4,8 +4,8 @@ import java.util.Calendar;
 
 import org.apache.log4j.Logger;
 
-import de.femodeling.e4.internal.exception.SessionExpiredException;
 import de.femodeling.e4.model.core.Session;
+import de.femodeling.e4.server.internal.exception.SessionExpiredException;
 
 public class SessionService implements SessionServiceIF {
 	

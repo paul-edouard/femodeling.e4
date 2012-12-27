@@ -1,8 +1,8 @@
 package de.femodeling.e4.server.service.transform;
 
-import de.femodeling.e4.internal.model.UserServerImpl;
 import de.femodeling.e4.model.dto.UserDTO;
 import de.femodeling.e4.model.dto.UserDTOImpl;
+import de.femodeling.e4.server.internal.model.UserServerImpl;
 
 
 

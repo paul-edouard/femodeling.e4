@@ -1,8 +1,8 @@
 package de.femodeling.e4.server.service.dao;
 
-import de.femodeling.e4.internal.model.AssemblyServerImpl;
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.core.assembly.Assembly;
+import de.femodeling.e4.server.internal.model.AssemblyServerImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 
 
 

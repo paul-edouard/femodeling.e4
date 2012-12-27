@@ -10,9 +10,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.femodeling.e4.internal.model.ConnectionElementServerImpl;
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.xml.XmlFile;
+import de.femodeling.e4.server.internal.model.ConnectionElementServerImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 
 
 public class ConnectionElementDAOImpl extends XmlFile implements ConnectionElementDAOIF {

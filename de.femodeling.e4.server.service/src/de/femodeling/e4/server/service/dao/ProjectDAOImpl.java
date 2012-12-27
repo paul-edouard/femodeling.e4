@@ -9,10 +9,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.core.Project.State;
 import de.femodeling.e4.model.core.Project.Type;
 import de.femodeling.e4.model.xml.XmlFile;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 import de.femodeling.e4.util.file.FileService;
 
 

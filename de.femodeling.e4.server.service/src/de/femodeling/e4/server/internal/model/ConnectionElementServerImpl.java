@@ -1,4 +1,4 @@
-package de.femodeling.e4.internal.model;
+package de.femodeling.e4.server.internal.model;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;

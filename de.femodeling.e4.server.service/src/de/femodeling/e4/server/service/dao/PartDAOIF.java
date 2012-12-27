@@ -3,9 +3,9 @@ package de.femodeling.e4.server.service.dao;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.femodeling.e4.internal.model.PartServerImpl;
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.core.part.Part;
+import de.femodeling.e4.server.internal.model.PartServerImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 
 public interface PartDAOIF {
 	

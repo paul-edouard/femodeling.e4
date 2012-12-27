@@ -1,9 +1,9 @@
 package de.femodeling.e4.server.service.transform;
 
-import de.femodeling.e4.internal.model.LockableEntityServerImpl;
 import de.femodeling.e4.model.core.LockableEntity;
 import de.femodeling.e4.model.dto.LockableEntityDTO;
 import de.femodeling.e4.model.dto.LockableEntityDTOImpl;
+import de.femodeling.e4.server.internal.model.LockableEntityServerImpl;
 
 
 

@@ -9,8 +9,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.femodeling.e4.internal.model.UserServerImpl;
 import de.femodeling.e4.model.xml.XmlFile;
+import de.femodeling.e4.server.internal.model.UserServerImpl;
 import de.femodeling.e4.util.Execute;
 import de.femodeling.e4.util.Utils;
 

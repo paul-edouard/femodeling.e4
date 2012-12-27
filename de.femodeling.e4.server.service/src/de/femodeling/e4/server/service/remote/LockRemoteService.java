@@ -6,9 +6,9 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import de.femodeling.e4.internal.context.ServerContextProvider;
-import de.femodeling.e4.internal.model.LockableEntityServerImpl;
 import de.femodeling.e4.model.dto.LockableEntityDTO;
+import de.femodeling.e4.server.internal.context.ServerContextProvider;
+import de.femodeling.e4.server.internal.model.LockableEntityServerImpl;
 import de.femodeling.e4.server.service.dao.LockableEntityDAOIF;
 import de.femodeling.e4.server.service.dao.LockableEntityDAOImpl;
 import de.femodeling.e4.server.service.dao.RegisterServerDAOService;

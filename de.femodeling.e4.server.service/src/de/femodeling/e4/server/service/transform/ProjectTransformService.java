@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.dto.ProjectDTO;
 import de.femodeling.e4.model.dto.ProjectDTOImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 import de.femodeling.e4.server.service.dao.ProjectDAOIF;
 import de.femodeling.e4.server.service.dao.RegisterServerDAOService;
 

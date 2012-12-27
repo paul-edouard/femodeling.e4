@@ -5,9 +5,9 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
-import de.femodeling.e4.internal.context.ServerContextProvider;
 import de.femodeling.e4.model.core.Message;
 import de.femodeling.e4.model.dto.MessageDTO;
+import de.femodeling.e4.server.internal.context.ServerContextProvider;
 import de.femodeling.e4.server.service.dao.MessageDAOIF;
 import de.femodeling.e4.server.service.dao.MessageDAOImpl;
 import de.femodeling.e4.server.service.dao.RegisterServerDAOService;

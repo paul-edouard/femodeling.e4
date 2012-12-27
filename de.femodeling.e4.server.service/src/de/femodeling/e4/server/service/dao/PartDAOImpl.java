@@ -11,14 +11,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import de.femodeling.e4.internal.model.PartServerImpl;
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.core.part.Material;
 import de.femodeling.e4.model.core.part.Part;
 import de.femodeling.e4.model.core.part.Representation;
 import de.femodeling.e4.model.core.part.Translation;
 import de.femodeling.e4.model.core.part.Weight;
 import de.femodeling.e4.model.xml.XmlFile;
+import de.femodeling.e4.server.internal.model.PartServerImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 
 
 public class PartDAOImpl extends XmlFile implements PartDAOIF {

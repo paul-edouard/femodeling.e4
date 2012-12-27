@@ -7,16 +7,16 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import de.femodeling.e4.internal.model.AssemblyServerImpl;
-import de.femodeling.e4.internal.model.ConnectionElementServerImpl;
-import de.femodeling.e4.internal.model.PartServerImpl;
-import de.femodeling.e4.internal.model.ProjectServerImpl;
 import de.femodeling.e4.model.core.assembly.Assembly;
 import de.femodeling.e4.model.core.part.Part;
 import de.femodeling.e4.model.dto.AssemblyDTO;
 import de.femodeling.e4.model.dto.ConnectionElementDTO;
 import de.femodeling.e4.model.dto.PartDTO;
 import de.femodeling.e4.model.dto.ProjectDTO;
+import de.femodeling.e4.server.internal.model.AssemblyServerImpl;
+import de.femodeling.e4.server.internal.model.ConnectionElementServerImpl;
+import de.femodeling.e4.server.internal.model.PartServerImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 import de.femodeling.e4.server.service.dao.AssemblyDAOImpl;
 import de.femodeling.e4.server.service.dao.ConnectionElementDAOImpl;
 import de.femodeling.e4.server.service.dao.PartDAOImpl;

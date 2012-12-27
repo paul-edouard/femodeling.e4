@@ -3,8 +3,8 @@ package de.femodeling.e4.server.service.dao;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.femodeling.e4.internal.model.ConnectionElementServerImpl;
-import de.femodeling.e4.internal.model.ProjectServerImpl;
+import de.femodeling.e4.server.internal.model.ConnectionElementServerImpl;
+import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 
 
 
