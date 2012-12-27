@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xmlns:p="http://www.springframework.org/schema/p"  
+       xmlns:util="http://www.springframework.org/schema/util"  
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">  
+  
+  <!-- local -->
+
+   <util:map id="configFilesMap">  
+      <entry key="ProjectDir" value="C:\POLO\Eclipse\Project" />
+      <entry key="UserFileList" value="C:\POLO\Eclipse\Project\UserList.xml" />
+      <entry key="LockedEntitiesList" value="C:\POLO\Eclipse\Project\LockedEntitiesList.xml" />   
+   </util:map>  
+     
+     
+  <!-- ceplx265 -->
+<!--
+   <util:map id="configFilesMap">  
+      <entry key="ProjectDir" value="/scr1/p323518/01_Prog/Proj/ProjDir" />
+      <entry key="UserFileList" value="/scr1/p323518/01_Prog/Proj/UserList.xml" />
+      <entry key="LockedEntitiesList" value="/scr1/p323518/01_Prog/Proj/LockedEntitiesList.xml" />   
+   </util:map> 
+
+    -->
+  
+  <!--
+   <bean id="projectRemoteService"  
+         class="de.porsche.femodeling.core.project.ProjectRemoteService"  
+         p:configFiles-ref="configFilesMap">
+         
+   </bean>  
+    -->      
+   
+   <!-- User Service -->
+         
+   <bean id="userRemoteService"   class="de.femodeling.e4.server.internal.UserRemoteService"
+   			 p:configFiles-ref="configFilesMap">
+    </bean>
+    
+    
+      
+	
+	<!-- The advice for the automatic authentication with context information. -->
+	<bean class="de.femodeling.e4.server.internal.exception.ServiceExceptionAdvice" id="serviceExceptionAdvice"/>
+
+	<!-- The advice for the automatic authentication with context information. -->
+	<bean class="de.femodeling.e4.server.internal.context.ServerContextProvider" id="contextProvider"/>
+
+	<!-- The filter for the automatic authentication with context information. -->
+	<bean class="de.femodeling.e4.server.internal.context.ServerContextProviderFilter" id="contextProviderFilter"/>
+	
+	<!-- The advice for the automatic authentication with context information. -->
+	<bean class="de.femodeling.e4.server.internal.context.SecurityAdvice" id="securityAdvice">
+		<property name="contextProvider" ref="contextProvider"/>
+	</bean> 
+	
+	<!-- Project Service -->
+	<bean class="org.springframework.aop.framework.ProxyFactoryBean" id="projectRemoteService">
+		<property name="proxyInterfaces" value="de.femodeling.e4.server.service.remote.ProjectRemoteServiceIF"/>
+		<property name="target" ref="projectRemoteServiceTarget"/>
+		<property name="interceptorNames">
+			<list>
+				<value>serviceExceptionAdvice</value>
+				<value>securityAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="de.femodeling.e4.server.internal.ProjectRemoteService" id="projectRemoteServiceTarget" 
+	 p:configFiles-ref="configFilesMap">
+		
+	</bean>
+	
+	
+	<!-- Session Service -->
+	<bean class="org.springframework.aop.framework.ProxyFactoryBean" id="sessionService">
+		<property name="proxyInterfaces" value="de.femodeling.e4.server.service.remote.SessionServiceIF"/>
+		<property name="target" ref="sessionServiceTarget"/>
+		<property name="interceptorNames">
+			<list>
+				<value>serviceExceptionAdvice</value>
+				<value>securityAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="de.femodeling.e4.server.internal.SessionService" id="sessionServiceTarget">
+	</bean>
+	
+	
+	<!-- Lock Service -->
+	<bean class="org.springframework.aop.framework.ProxyFactoryBean" id="lockRemoteService">
+		<property name="proxyInterfaces" value="de.femodeling.e4.server.service.remote.LockRemoteServiceIF"/>
+		<property name="target" ref="lockRemoteServiceTarget"/>
+		<property name="interceptorNames">
+			<list>
+				<value>serviceExceptionAdvice</value>
+				<value>securityAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="de.femodeling.e4.server.internal.LockRemoteService" id="lockRemoteServiceTarget"
+	 p:configFiles-ref="configFilesMap">
+	</bean>
+	
+	
+	
+	<!-- Message Service -->
+	<bean class="org.springframework.aop.framework.ProxyFactoryBean" id="messageRemoteService">
+		<property name="proxyInterfaces" value="de.femodeling.e4.server.service.remote.MessageRemoteServiceIF"/>
+		<property name="target" ref="MessageRemoteServiceTarget"/>
+		<property name="interceptorNames">
+			<list>
+				<value>serviceExceptionAdvice</value>
+				<value>securityAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="de.femodeling.e4.server.internal.MessageRemoteService" id="MessageRemoteServiceTarget">
+	</bean>
+	
+	        
+  
+</beans> 
