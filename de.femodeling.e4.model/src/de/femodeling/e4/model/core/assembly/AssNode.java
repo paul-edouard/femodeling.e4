@@ -17,7 +17,7 @@ import de.femodeling.e4.model.xml.XmlElementIF;
 public class AssNode implements XmlElementIF, Serializable {
 	
 	static final long serialVersionUID=1L;
-	protected static final String ROOT_ID="root";
+	public static final String ROOT_ID="root";
 	
 	static final String IdStr="id";
 	static final String ModuleIdStr="module_id";

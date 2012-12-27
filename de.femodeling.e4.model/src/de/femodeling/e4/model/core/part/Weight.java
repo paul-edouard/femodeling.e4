@@ -11,11 +11,11 @@ public class Weight implements Serializable{
 	/** The serial version UID. */
     private static final long serialVersionUID = 1L;
 	
-    static final String DateStr="date";
-	static final String EvaluationStr="evaluation";
-	static final String WeightTypStr="weight_typ";
-	static final String ValueStr="value";
-	static final String OriginSystemStr="origin_system";
+    public static final String DateStr="date";
+    public static final String EvaluationStr="evaluation";
+    public static final String WeightTypStr="weight_typ";
+    public static final String ValueStr="value";
+    public static final String OriginSystemStr="origin_system";
     
     
 	private String date;
