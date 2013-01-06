@@ -1,8 +1,6 @@
  
 package de.femodeling.e4.client.ui.parts;
 
-import java.util.Set;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -10,26 +8,11 @@ import javax.inject.Inject;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.window.Window;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Tree;
 
-import de.femodeling.e4.client.model.UserClientImpl;
 import de.femodeling.e4.client.model.core.UserClientGroup;
-import de.femodeling.e4.client.ui.contentprovider.UsersTreeContentProvider;
-import de.femodeling.e4.client.ui.dialog.UserDialog;
-import de.femodeling.e4.client.ui.labelprovider.UsersTreeLabelProvider;
-import de.femodeling.e4.client.ui.sorter.UsersTreeSorter;
 
 
 public class UsersPart {
@@ -51,7 +34,7 @@ public class UsersPart {
 	public void postConstruct(Composite parent,Shell shell) {
 
 		refreshUsers();
-
+		/*
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FillLayout(SWT.HORIZONTAL));
 
@@ -115,6 +98,7 @@ public class UsersPart {
 		initializeToolBar();
 		initializeMenu();
 		m_bindingContext = initDataBindings();
+		*/
 	}
 	
 	
@@ -137,7 +121,7 @@ public class UsersPart {
 	
 	
 	private void refreshUsers() {
-
+		/*
 		rootGroup.clearList();
 
 		Set<UserClientImpl> users = RegisterClientService.INSTANCE
@@ -155,7 +139,7 @@ public class UsersPart {
 		}
 
 		rootGroup.addGroup(allUsers);
-
+		*/
 	}
 	
 	
