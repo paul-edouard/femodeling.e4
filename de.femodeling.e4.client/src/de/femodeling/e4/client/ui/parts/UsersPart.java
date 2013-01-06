@@ -26,7 +26,6 @@ import org.eclipse.swt.widgets.Tree;
 
 import de.femodeling.e4.client.model.UserClientImpl;
 import de.femodeling.e4.client.model.core.UserClientGroup;
-import de.femodeling.e4.client.service.IClientService;
 import de.femodeling.e4.client.ui.contentprovider.UsersTreeContentProvider;
 import de.femodeling.e4.client.ui.dialog.UserDialog;
 import de.femodeling.e4.client.ui.labelprovider.UsersTreeLabelProvider;
@@ -40,8 +39,8 @@ public class UsersPart {
 	private TreeViewer treeViewer;
 	private DataBindingContext m_bindingContext;
 	
-	@Inject
-	IClientService service;
+
+	
 	
 	@Inject
 	public UsersPart() {
