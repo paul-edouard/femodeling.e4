@@ -16,6 +16,8 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import de.femodeling.e4.client.model.core.AssNodeClient;
+
 
 
 public class AssemblyClientExport {

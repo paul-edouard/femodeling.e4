@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.femodeling.e4.client.model.core.ProjectClient;
+import de.femodeling.e4.client.model.listener.ProjectClientListenerIF;
 import de.femodeling.e4.model.core.Project;
 import de.femodeling.e4.model.core.Project.State;
 import de.femodeling.e4.model.core.Project.Type;

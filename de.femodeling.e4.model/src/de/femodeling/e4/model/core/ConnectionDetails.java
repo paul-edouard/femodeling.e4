@@ -26,4 +26,12 @@ public class ConnectionDetails {
 	public String getResource() {
 		return String.valueOf(System.currentTimeMillis());
 	}
+
+	@Override
+	public String toString() {
+		return "ConnectionDetails [userId=" + userId + ", server=" + server
+				+ ", password=" + password + "]";
+	}
+	
+	
 }

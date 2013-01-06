@@ -18,5 +18,31 @@
          </property>
       </product>
    </extension>
+   <extension
+         point="de.femodeling.e4.ui.preferences.preferencePages">
+      <page
+            class="de.femodeling.e4.client.ui.preferences.GeneralPreferencePage"
+            id="de.femodeling.e4.client.preferences.page.general"
+            image="icons/login_dialog.gif"
+            name="General"
+            tree_icon="icons/cross.png">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="de.femodeling.e4.oneProjectSelection">
+         <with
+               variable="org.eclipse.e4.ui.selection">
+            <iterate
+                  ifEmpty="true"
+                  operator="or">
+               <instanceof
+                     value="de.femodeling.e4.client.model.ProjectClientImpl">
+               </instanceof>
+            </iterate>
+         </with>
+      </definition>
+   </extension>
 
 </plugin>

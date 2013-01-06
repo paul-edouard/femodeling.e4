@@ -181,6 +181,20 @@ public class AssNode implements XmlElementIF, Serializable {
 		return deltaMass2;
 	}
 	
+	public void setDynWeigth(float dynWeigth) {
+		this.dynWeigth = dynWeigth;
+	}
+	
+
+	public float getDynWeigth() {
+		return dynWeigth;
+	}
+
+	
+	public String getUuid() {
+		return uuid;
+	}
+	
 	
 
 	/***********************************

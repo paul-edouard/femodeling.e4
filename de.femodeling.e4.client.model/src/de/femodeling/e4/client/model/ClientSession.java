@@ -1,16 +1,16 @@
 package de.femodeling.e4.client.model;
 
 import org.apache.log4j.Logger;
+import org.eclipse.e4.core.di.annotations.Creatable;
 
 import de.femodeling.e4.model.core.ConnectionDetails;
 
 
 
+@Creatable
+public class  ClientSession {
 
-public enum ClientSession {
-
-	INSTANCE;
-
+	
 	private static Logger logger = Logger.getLogger(ClientSession.class);
 
 	private String name;
@@ -19,8 +19,9 @@ public enum ClientSession {
 	private UserClientImpl user;
 	private ConnectionDetails connectionDetails;
 
-	private ClientSession() {
-
+	
+	public ClientSession() {
+		//logger.info("Client Session created!!!");
 	}
 
 	public ConnectionDetails getConnectionDetails() {
@@ -29,6 +30,7 @@ public enum ClientSession {
 
 	public void setConnectionDetails(ConnectionDetails details) {
 		this.connectionDetails = details;
+		this.server=details.getServer();
 	}
 
 	public String getSessionId() {
@@ -39,15 +41,7 @@ public enum ClientSession {
 		this.sessionId = sessionId;
 	}
 
-	public void keepAlive() {
-		logger.info("Session:" + sessionId);
-		
-		//TODO inject the session service
-		/*
-		RegisterClientRemoteService.INSTANCE.getSessionService().keepAlive(
-				sessionId);
-				*/
-	}
+	
 
 	public void setSessionDescription(String name, String server) {
 		this.name = name;

@@ -93,10 +93,11 @@ public class MessageDAOImpl implements MessageDAOIF {
 	public synchronized LinkedList<Message> getLastMesssages(final String SessionId, final Date lastMessageCall) {
 		LinkedList<Message> returnMesList=new LinkedList<Message>();
 		for(Message ent:lastMessages){
-			if(!SessionId.equals(ent.getSendingSessionId()) &&
-					ent.getCreatingTime().after(lastMessageCall))
+			if(!SessionId.equals(ent.getSendingSessionId()) &&  
+					ent.getCreatingTime().compareTo(lastMessageCall)>=0 )
 				returnMesList.add(ent);
 		}
+		
 		
 		return returnMesList;
 	}

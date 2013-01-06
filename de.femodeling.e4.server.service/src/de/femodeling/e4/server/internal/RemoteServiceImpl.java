@@ -1,9 +1,12 @@
 package de.femodeling.e4.server.internal;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
+import de.femodeling.e4.server.internal.context.HttpInvokerRequestExecutor;
 import de.femodeling.e4.server.service.RemoteService;
 import de.femodeling.e4.server.service.remote.LockRemoteServiceIF;
 import de.femodeling.e4.server.service.remote.MessageRemoteServiceIF;
@@ -12,6 +15,8 @@ import de.femodeling.e4.server.service.remote.SessionServiceIF;
 import de.femodeling.e4.server.service.remote.UserRemoteServiceIF;
 
 public class RemoteServiceImpl implements RemoteService {
+	
+	private static Logger logger = Logger.getLogger(RemoteServiceImpl.class);
 	
 	
 	//private final String DEFAULT_CONTEXT_LOCATION="classpath:spring-http-client-config.xml";
@@ -31,18 +36,40 @@ public class RemoteServiceImpl implements RemoteService {
 	
 	
 	public RemoteServiceImpl(){
-		System.out.println("Remote Service impl started");
+		BasicConfigurator.configure();
+		logger.info("Remote Service impl started");
 	}
 	
 	
 	
 	public void init(String applicationContextLocation){
 		serviceLocation=applicationContextLocation;
-		System.out.println("Set Context locations");
+		//System.out.println("Set service locations:"+serviceLocation);
+		//clear the context
+		clearContext();
 	}
 	
+	private void clearContext(){
+		//clear the services
+		projectRemoteService=null;
+		userService=null;
+		sessionService=null;
+		lockService=null;
+		messageService=null;
+		context=null;
+	}
+	
+	
+	public void setSessionId(String sessionid){
+		HttpInvokerRequestExecutor.setSessionId(sessionid);
+	}
+	public void setUserId(String userid){
+		HttpInvokerRequestExecutor.setUserId(userid);
+	}
+	
+	
 	@Override
-	public ProjectRemoteServiceIF getProjectRemoteService() {
+	public ProjectRemoteServiceIF getProjectService() {
 		if(projectRemoteService==null){
 			projectRemoteService=(ProjectRemoteServiceIF) getRemoteService("projectProxyService");
 		}
@@ -74,13 +101,23 @@ public class RemoteServiceImpl implements RemoteService {
 	}
 
 	@Override
-	public MessageRemoteServiceIF getMessageRemoteService() {
+	public MessageRemoteServiceIF getMessageService() {
 		if(messageService==null){
 			messageService=(MessageRemoteServiceIF) getRemoteService("messageProxyService");
 		}
 		return messageService;
 	}
 	
+	public void startMessageService(){
+		//TODO Start the Message Service
+		
+		
+	}
+	
+	
+	public void stopMessageService(){
+		//TODO Stop the message service
+	}
 	
 	private Object getRemoteService(String serviceName){
 		Thread currentThread = Thread.currentThread();

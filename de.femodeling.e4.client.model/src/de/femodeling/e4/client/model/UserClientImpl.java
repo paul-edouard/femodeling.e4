@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.femodeling.e4.client.model.core.UserClient;
+import de.femodeling.e4.client.model.listener.UserClientListenerIF;
+
 public class UserClientImpl extends UserClient {
 
 	/** The serial version UID. */

@@ -10,11 +10,18 @@ import de.femodeling.e4.server.service.remote.UserRemoteServiceIF;
 public interface RemoteService {
 	
 	public void init(String applicationContextLocation);
+	public void setSessionId(String sessionid);
+	public void setUserId(String userid);
 	
-	public ProjectRemoteServiceIF getProjectRemoteService();
+	
+	public ProjectRemoteServiceIF getProjectService();
 	public UserRemoteServiceIF getUserService();
 	public SessionServiceIF getSessionService();
 	public LockRemoteServiceIF getLockService();
-	public MessageRemoteServiceIF getMessageRemoteService();
+	public MessageRemoteServiceIF getMessageService();
+	
+	public void startMessageService();
+	public void stopMessageService();
+	
 
 }

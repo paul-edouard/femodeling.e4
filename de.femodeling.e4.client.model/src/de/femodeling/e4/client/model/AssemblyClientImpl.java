@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.femodeling.e4.client.model.core.AssNodeClient;
+import de.femodeling.e4.client.model.core.AssemblyClient;
+import de.femodeling.e4.client.model.listener.AssemblyClientListenerIF;
 import de.femodeling.e4.model.core.assembly.Assembly;
 
 

@@ -6,6 +6,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.femodeling.e4.client.model.listener.LockableEntityListenerIF;
 import de.femodeling.e4.model.core.LockableEntity;
 
 

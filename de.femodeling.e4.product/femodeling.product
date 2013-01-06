@@ -11,6 +11,8 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
+   <splash
+      location="de.femodeling.e4.client" />
    <launcher>
       <solaris/>
       <win useIco="false">

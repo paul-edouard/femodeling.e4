@@ -9,6 +9,8 @@ import java.util.List;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import de.femodeling.e4.client.model.core.PartClient;
+import de.femodeling.e4.client.model.listener.PartClientListenerIF;
 import de.femodeling.e4.model.core.part.Material;
 import de.femodeling.e4.model.core.part.Part.Type;
 import de.femodeling.e4.model.core.part.Property;
