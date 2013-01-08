@@ -3,8 +3,8 @@
 	<name>de.femodeling.e4.server</name>
 	<comment></comment>
 	<projects>
-		<project>de.femodeling.e4.server.service</project>
 		<project>de.femodeling.e4.model</project>
+		<project>de.femodeling.e4.server.service</project>
 		<project>de.femodeling.e4.util</project>
 	</projects>
 	<buildSpec>

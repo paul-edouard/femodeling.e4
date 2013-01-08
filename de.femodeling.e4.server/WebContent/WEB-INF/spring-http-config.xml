@@ -7,12 +7,19 @@
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">  
   
   <!-- local -->
-
+<!--
    <util:map id="configFilesMap">  
       <entry key="ProjectDir" value="C:\POLO\Eclipse\Project" />
       <entry key="UserFileList" value="C:\POLO\Eclipse\Project\UserList.xml" />
       <entry key="LockedEntitiesList" value="C:\POLO\Eclipse\Project\LockedEntitiesList.xml" />   
    </util:map>  
+    -->
+    
+   <util:map id="configFilesMap">  
+      <entry key="ProjectDir" value="D:\Paul\04_Programierung\Test\Project" />
+      <entry key="UserFileList" value="D:\Paul\04_Programierung\Test\Project\UserList.xml" />
+      <entry key="LockedEntitiesList" value="D:\Paul\04_Programierung\Test\Project\LockedEntitiesList.xml" />   
+   </util:map>   
      
      
   <!-- ceplx265 -->

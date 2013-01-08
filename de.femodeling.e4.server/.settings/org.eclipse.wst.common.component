@@ -3,10 +3,13 @@
     <wb-module deploy-name="de.femodeling.e4.server">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="de.femodeling.e4.model.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/de.femodeling.e4.model/de.femodeling.e4.model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="de.femodeling.e4.server.service.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/de.femodeling.e4.server.service/de.femodeling.e4.server.service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="de.femodeling.e4.model.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/de.femodeling.e4.model/de.femodeling.e4.model">
+        <dependent-module archiveName="de.femodeling.e4.util.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/de.femodeling.e4.util/de.femodeling.e4.util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="spring.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/org.spring/spring.jar">
@@ -19,9 +22,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="log4j-1.2.14.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/org.apache.log4j/log4j-1.2.14.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="de.femodeling.e4.util.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/de.femodeling.e4.util/de.femodeling.e4.util">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="de.femodeling.e4.server"/>
