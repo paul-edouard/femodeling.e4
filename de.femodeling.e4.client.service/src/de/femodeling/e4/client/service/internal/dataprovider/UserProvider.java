@@ -2,11 +2,13 @@ package de.femodeling.e4.client.service.internal.dataprovider;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
 import de.femodeling.e4.client.model.UserClientImpl;
+import de.femodeling.e4.client.model.core.UserClient;
 import de.femodeling.e4.client.service.IClientService;
 import de.femodeling.e4.client.service.IUserProvider;
 import de.femodeling.e4.client.service.internal.transform.UserTransformService;
@@ -22,7 +24,7 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	
 	/** This class' Logger instance. */
 	private static Logger logger = Logger
-			.getLogger(ProjectProvider.class);
+			.getLogger(UserProvider.class);
 
 	
 	/** The group this provider belongs to. */
@@ -34,6 +36,8 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	/** The type of this provider. */
 	public static final String DATA_ROOT = "user.root";
 	
+	
+	private UserClientImpl currentUser;
 	
 	private static IRegistery registery;
 	
@@ -59,7 +63,7 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	}
 	
 	private DataProviderCacheAdapter getDefault(){	
-		return (DataProviderCacheAdapter) registery.lookupDataProvider(ProjectProvider.DATA_PROVIDER_TYPE);
+		return (DataProviderCacheAdapter) registery.lookupDataProvider(UserProvider.DATA_PROVIDER_TYPE);
 	}
 	
 	
@@ -98,12 +102,27 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 		return (UserClientImpl) user;
 	}
 	
-	/* (non-Javadoc)
-	 * @see de.femodeling.e4.client.service.internal.dataprovider.IUserProvider#getDataCollection(java.lang.String)
-	 */
-	@Override
-	public Collection getDataCollection(String userGroup){
-		return getDefault().getDataCollection(new UUIDCollectionKey(userGroup));
+	
+	
+	public Collection<UserClientImpl> getAllUsers(){
+		
+		Collection<UserClientImpl> r=new LinkedList<UserClientImpl>();
+		for(Object o: getDefault().getDataCollection(new UUIDCollectionKey(UserClient.TYPE_USER))){
+			if(o instanceof UserClientImpl)
+				r.add((UserClientImpl) o);
+		}
+		
+		return r;
+	}
+	
+	public Collection<UserClientImpl> getAllGroups(){
+		Collection<UserClientImpl> r=new LinkedList<UserClientImpl>();
+		for(Object o: getDefault().getDataCollection(new UUIDCollectionKey(UserClient.TYPE_GROUP))){
+			if(o instanceof UserClientImpl)
+				r.add((UserClientImpl) o);
+		}
+		
+		return r;
 	}
 	
 	
@@ -112,7 +131,8 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	 */
 	@Override
 	public UserClientImpl getCurrentUser(){
-		return service.getUserClientService().getCurrentUser();
+		if(currentUser==null)currentUser=service.getUserClientService().getCurrentUser();
+		return currentUser;
 	}
 	
 	/* (non-Javadoc)
@@ -126,12 +146,12 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	
 	@Override
 	public String getType() {
-		return ProjectProvider.DATA_PROVIDER_TYPE;
+		return UserProvider.DATA_PROVIDER_TYPE;
 	}
 
 	@Override
 	public String getProviderGroup() {
-		return ProjectProvider.DATA_PROVIDER_GROUP;
+		return UserProvider.DATA_PROVIDER_GROUP;
 	}
 
 	@Override
@@ -165,7 +185,7 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 		}
 		else {
 			for(UserClientImpl u:userSet){
-				if(u.getGroups().contains(collectionKey.toString())){
+				if(u.getType().contains(collectionKey.toString())){
 					returnCollection.add(u);
 				}
 			}
@@ -206,6 +226,19 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 		if(!service.getUserClientService().deleteUser(user)){
 			return false;
 		}else{
+			Collection allUser=getAllUsers();
+			allUser.remove(user);
+			for(Object g:allUser){
+				if(!(g instanceof UserClientImpl))continue;
+				UserClientImpl group=(UserClientImpl) g;
+				if(group.getType().equals(UserClient.TYPE_USER))continue;
+				
+				if(group.getGroups().contains(user.getId())){
+					group.removeGroup(user.getId());
+					updateData(group);
+				}
+			}
+			
 			//TODO delete the key from the different collection key
 			return true;
 		}

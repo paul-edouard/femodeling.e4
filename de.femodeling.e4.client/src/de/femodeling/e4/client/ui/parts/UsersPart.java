@@ -1,18 +1,36 @@
  
 package de.femodeling.e4.client.ui.parts;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
+import de.femodeling.e4.bundleresourceloader.IBundleResourceLoader;
+import de.femodeling.e4.client.model.UserClientImpl;
 import de.femodeling.e4.client.model.core.UserClientGroup;
+import de.femodeling.e4.client.service.IUserProvider;
+import de.femodeling.e4.client.ui.contentprovider.UsersTreeContentProvider;
+import de.femodeling.e4.client.ui.dialog.UserDialog;
+import de.femodeling.e4.client.ui.labelprovider.UsersTreeLabelProvider;
+import de.femodeling.e4.client.ui.sorter.UsersTreeSorter;
 
 
 public class UsersPart {
@@ -23,7 +41,17 @@ public class UsersPart {
 	private DataBindingContext m_bindingContext;
 	
 
+	@Inject
+	IEclipseContext context;
 	
+	@Inject
+	IBundleResourceLoader loader;
+	
+	@Inject
+	IUserProvider provider;
+	
+	@Inject
+	Shell shell;
 	
 	@Inject
 	public UsersPart() {
@@ -31,14 +59,15 @@ public class UsersPart {
 	}
 	
 	@PostConstruct
-	public void postConstruct(Composite parent,Shell shell) {
+	public void postConstruct(Composite parent) {
 
 		refreshUsers();
-		/*
+		
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		treeViewer = new TreeViewer(container, SWT.BORDER);
+		/*
 		treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				ISelection selection = event.getSelection();
@@ -56,7 +85,8 @@ public class UsersPart {
 				//DeleteUser.setEnabled(false);
 			}
 		});
-		treeViewer.setSorter(new UsersTreeSorter());
+		*/
+		
 		treeViewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
 				ISelection selection = event.getSelection();
@@ -74,9 +104,7 @@ public class UsersPart {
 						int code = d.open();
 
 						if (code == Window.OK) {
-							RegisterClientService.INSTANCE
-									.getUserClientService().saveUser(
-											selectedUser);
+							provider.putData(selectedUser);
 							treeViewer.refresh();
 						} else {
 							selectedUser.copyData(copy);
@@ -88,12 +116,17 @@ public class UsersPart {
 				}
 			}
 		});
-		Tree tree = treeViewer.getTree();
 		
-		treeViewer.setLabelProvider(new UsersTreeLabelProvider());
+		
+		//Tree tree = treeViewer.getTree();
+		
+		treeViewer.setLabelProvider(new UsersTreeLabelProvider(loader));
 		treeViewer.setContentProvider(new UsersTreeContentProvider());
+		treeViewer.setSorter(new UsersTreeSorter());
 		treeViewer.setInput(rootGroup);
-
+		
+		
+		/*
 		createActions();
 		initializeToolBar();
 		initializeMenu();
@@ -110,7 +143,7 @@ public class UsersPart {
 	
 	@Focus
 	public void onFocus() {
-		//TODO Your code here
+		treeViewer.getTree().setFocus();
 	}
 	
 	
@@ -121,25 +154,26 @@ public class UsersPart {
 	
 	
 	private void refreshUsers() {
-		/*
+		
 		rootGroup.clearList();
-
-		Set<UserClientImpl> users = RegisterClientService.INSTANCE
-				.getUserClientService().getAllUsers();
+		
+		
+		Collection<UserClientImpl> users = provider.getAllUsers();
 		UserClientGroup allUsers = new UserClientGroup("All");
 		for (UserClientImpl user : users) {
 			allUsers.addUser(user);
 		}
 
-		Set<String> onlineUserIds = RegisterClientService.INSTANCE
-				.getUserClientService().getOnlineUserIds();
+		Set<String> onlineUserIds = provider.getOnlineUserIds();
 		for (UserClientImpl user : users) {
 			if (onlineUserIds.contains(user.getId()))
 				user.setOnline(true);
 		}
+		
 
 		rootGroup.addGroup(allUsers);
-		*/
+		
+		
 	}
 	
 	

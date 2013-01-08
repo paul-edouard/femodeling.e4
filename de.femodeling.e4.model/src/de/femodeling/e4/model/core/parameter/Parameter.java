@@ -91,8 +91,26 @@ public class Parameter implements XmlElementIF, Serializable {
 		this.childs=new LinkedList<Parameter>();
 	}
 	
+	
+	private Parameter(String key, Object value, Type type) {
+		super();
+		this.key = key;
+		this.value = value;
+		this.type = type;
+		this.childs=new LinkedList<Parameter>();
+	}
+
 	public static Parameter createRoot(Class<?> clazz){
 		return new Parameter(ROOT_KEY,clazz.getName());
+	}
+	
+	public Parameter createCopy(){
+		Parameter param=new Parameter(this.getKey(),this.getValue(),this.getType());
+		for(Parameter child:this.getChilds()){
+			param.addChild(child.createCopy());
+		}
+		
+		return param;
 	}
 	
 	

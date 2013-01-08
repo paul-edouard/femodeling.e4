@@ -162,14 +162,12 @@ public class ProjectsPart {
 		menuService.registerContextMenu(treeViewer.getTree(), "de.femodeling.e4.client.popupmenu.project");
 		
 		
-		
 		//ViewerSupport.
 		root.addProjectsListener(new ProjectClientListenerIF() {
 			public void projectsChanged(ProjectClientImpl parent,
 					ProjectClientImpl entry) {
 				
 			
-				
 				Display display=shell.getDisplay();
 				
 				display.asyncExec(new Runnable() {

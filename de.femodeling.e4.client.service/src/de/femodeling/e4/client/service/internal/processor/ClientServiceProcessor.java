@@ -9,6 +9,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import de.femodeling.e4.client.model.ClientSession;
 import de.femodeling.e4.client.service.IClientService;
 import de.femodeling.e4.client.service.IProjectProvider;
+import de.femodeling.e4.client.service.IUserProvider;
 import de.femodeling.e4.client.service.internal.job.MessagesJob;
 import de.femodeling.e4.server.service.RemoteService;
 import de.femodeling.e4.ui.dataprovider.registery.IRegistery;
@@ -22,7 +23,7 @@ public class ClientServiceProcessor {
 	@Execute
 	public void execute(RemoteService remoteService, ClientSession session,
 			IClientService service,IEclipseContext context,
-			IRegistery registery,IProjectProvider projectProvider){
+			IRegistery registery,IProjectProvider projectProvider,IUserProvider userProvider){
 		//Client service initialization
 		logger.info("Client service initialization");
 		service.init(remoteService, session);
@@ -30,6 +31,10 @@ public class ClientServiceProcessor {
 		//Project Provider service initialization
 		logger.info("----->Project Provider service initialization");
 		projectProvider.init(registery, service, remoteService);
+		
+		//User Provider service initialization
+		logger.info("----->User Provider service initialization");
+		userProvider.init(registery, service);
 		
 		//Start the message service
 		logger.info("Start of message service");

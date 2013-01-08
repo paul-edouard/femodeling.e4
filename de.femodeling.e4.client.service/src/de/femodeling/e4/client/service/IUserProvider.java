@@ -17,8 +17,10 @@ public interface IUserProvider {
 	public abstract boolean removeData(UserClientImpl p);
 
 	public abstract UserClientImpl getData(String userId);
-
-	public abstract Collection getDataCollection(String userGroup);
+	
+	public abstract Collection<UserClientImpl> getAllUsers();
+	
+	public abstract Collection<UserClientImpl> getAllGroups();
 
 	public abstract UserClientImpl getCurrentUser();
 

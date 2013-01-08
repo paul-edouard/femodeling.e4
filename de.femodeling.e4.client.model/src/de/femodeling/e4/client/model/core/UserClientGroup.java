@@ -48,6 +48,19 @@ public class UserClientGroup {
 		this.parent = parent;
 	}
 	
+	public int getNumberOfOnlineUsers(){
+		int count=0;
+		for(Object o:contentList){
+			if(o instanceof UserClientImpl){
+				if(((UserClientImpl)o).isOnline())
+					count++;
+			}
+		}
+		
+		
+		return count;
+	}
+	
 	
 	 
 }

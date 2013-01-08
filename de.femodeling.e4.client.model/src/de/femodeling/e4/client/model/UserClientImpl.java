@@ -6,6 +6,7 @@ import java.util.List;
 
 import de.femodeling.e4.client.model.core.UserClient;
 import de.femodeling.e4.client.model.listener.UserClientListenerIF;
+import de.femodeling.e4.util.Utils;
 
 public class UserClientImpl extends UserClient {
 
@@ -93,16 +94,46 @@ public class UserClientImpl extends UserClient {
 		fireUserChanged();
 		super.setRoles(roles);
 	}
+	
+	public void setType(String type) {
+		propertyChangeSupport.firePropertyChange(UserClient.TYPE, this.getType(),
+				type);
+		fireUserChanged();
+		super.setType(type);
+	}
+	
+	/***********************************
+	 * * GROUP * *
+	 ***********************************/
+	public void addGroup(String role) {
+		propertyChangeSupport.firePropertyChange("groups", this.getGroups(),
+				this.getGroups());
+		fireUserChanged();
+		this.getGroups().add(role);
+	}
 
+	public void removeGroup(String role) {
+		propertyChangeSupport.firePropertyChange("groups", this.getGroups(),
+				this.getGroups());
+		fireUserChanged();
+		this.getGroups().remove(role);
+	}
+	
 	/***********************************
 	 * * ROLES * *
 	 ***********************************/
 
 	public void addRole(String role) {
+		propertyChangeSupport.firePropertyChange("roles", this.getRoles(),
+				this.getRoles());
+		fireUserChanged();
 		this.getRoles().add(role);
 	}
 
 	public void removeRole(String role) {
+		propertyChangeSupport.firePropertyChange("roles", this.getRoles(),
+				this.getRoles());
+		fireUserChanged();
 		this.getRoles().remove(role);
 	}
 
@@ -117,26 +148,30 @@ public class UserClientImpl extends UserClient {
 		UserClientImpl user = new UserClientImpl();
 
 		user.setForename(this.getForename());
-		user.setGroups(this.getGroups());
+		user.setGroups(Utils.copySet(this.getGroups()));
 		user.setId(this.getId());
 		user.setLocation(this.getLocation());
 		user.setPassword(this.getPassword());
 		user.setPhonenumber(this.getPhonenumber());
-		user.setRoles(this.getRoles());
+		user.setRoles(Utils.copySet(this.getRoles()));
 		user.setSurname(this.getSurname());
+		user.setParameter(this.getParameter().createCopy());
 
 		return user;
 	}
+	
+	
 
 	public void copyData(UserClientImpl ent) {
 		this.setForename(ent.getForename());
-		this.setGroups(ent.getGroups());
+		this.setGroups(Utils.copySet(ent.getGroups()));
 		this.setId(ent.getId());
 		this.setLocation(ent.getLocation());
 		this.setPassword(ent.getPassword());
 		this.setPhonenumber(ent.getPhonenumber());
-		this.setRoles(ent.getRoles());
+		this.setRoles(Utils.copySet(ent.getRoles()));
 		this.setSurname(ent.getSurname());
+		this.setParameter(ent.getParameter().createCopy());
 	}
 
 	/***********************************

@@ -19,6 +19,9 @@
                 <children xsi:type="menu:HandledToolItem" xmi:id="_8HuLgFZ_EeKcysUM9utr1Q" elementId="de.femodeling.e4.client.handledtoolitem.project.delete" label="Delete Project" iconURI="platform:/plugin/de.femodeling.e4.client/icons/folder_delete.png" tooltip="Delete the selected project" command="_w3tNcFZLEeKcysUM9utr1Q"/>
               </toolbar>
             </children>
+            <children xsi:type="basic:Part" xmi:id="_POPZEFmkEeKL4se6PqVdsw" elementId="de.femodeling.e4.client.part.users" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.ui.parts.UsersPart" label="Users" iconURI="platform:/plugin/de.femodeling.e4.client/icons/group.png">
+              <toolbar xmi:id="_RUPcQFmkEeKL4se6PqVdsw" elementId="de.femodeling.e4.client.toolbar.0"/>
+            </children>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_iEwLgE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partsashcontainer.rigth" containerData="60">
             <children xsi:type="basic:PartStack" xmi:id="_pBsvgE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.rightup"/>

@@ -22,6 +22,17 @@
                eternalEntry="true">
          </cachingStrategy>
       </provider>
+      <provider
+            class="de.femodeling.e4.client.service.internal.dataprovider.UserProvider"
+            id="de.femodeling.e4.client.service.provider.user"
+            name="User Provider">
+         <cachingStrategy
+               class="de.femodeling.e4.client.service.internal.dataprovider.UserCachingStrategy"
+               entryTimeOut="30000"
+               entryTimeToLive="60000"
+               eternalEntry="true">
+         </cachingStrategy>
+      </provider>
    </extension>
 
 </plugin>
