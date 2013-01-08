@@ -1,11 +1,14 @@
 package de.femodeling.e4.model.core;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
+import de.femodeling.e4.model.core.lockable.LockableEntity;
+import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
 
 
-public abstract class Message  implements Serializable{
+
+public abstract class Message extends  LockableEntityProChanSupp{
 
 	 /** The serial version UID. */
     private static final long serialVersionUID = 1L;
@@ -23,6 +26,7 @@ public abstract class Message  implements Serializable{
     private LockableEntity sendingEntity;
     
     private String parentId;
+    
 
 	public String getSendingSessionId() {
 		return sendingSessionId;

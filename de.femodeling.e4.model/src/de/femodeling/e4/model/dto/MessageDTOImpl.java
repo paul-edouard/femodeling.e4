@@ -14,7 +14,7 @@ public class MessageDTOImpl extends MessageDTO {
 	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof LockableEntityDTOImpl) {
+		if (object instanceof MessageDTOImpl) {
 			MessageDTOImpl otherEntityDTOImpl = (MessageDTOImpl) object;
 			return otherEntityDTOImpl.getOid().equals(getOid());
 		}

@@ -10,6 +10,7 @@ import org.w3c.dom.NodeList;
 
 import de.femodeling.e4.model.core.assembly.AssNode;
 import de.femodeling.e4.model.core.assembly.Assembly;
+import de.femodeling.e4.model.core.parameter.Parameter;
 import de.femodeling.e4.model.xml.XmlFile;
 import de.femodeling.e4.server.internal.model.AssemblyServerImpl;
 import de.femodeling.e4.server.internal.model.ProjectServerImpl;
@@ -105,6 +106,8 @@ public class AssemblyDAOImpl extends XmlFile implements AssemblyDAOIF {
 		Element child=ass.getRoot().toDomElement(doc);
 		e.appendChild(child);
 		
+		e.appendChild(ass.getParameter().toDomElement(doc));
+		
 		return e;
 	}
 	
@@ -125,6 +128,9 @@ public class AssemblyDAOImpl extends XmlFile implements AssemblyDAOIF {
 					if(chilElement.getTagName().equals(new AssNode().getTagName())){
 						AssNode e=new AssNode(chilElement);
 						ass.setRoot(e);
+					}
+					else if(chilElement.getTagName().equals(new Parameter().getTagName())){
+						ass.setParameter(new Parameter(chilElement));
 					}
 					
 				}

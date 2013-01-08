@@ -2,7 +2,8 @@ package de.femodeling.e4.client.service.core;
 
 import java.util.HashMap;
 
-import de.femodeling.e4.client.model.LockableEntityClientImpl;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
+
 
 public interface LockClientServiceIF {
 	
@@ -13,10 +14,10 @@ public interface LockClientServiceIF {
 	 * @param entity
 	 * @return true on success
 	 */
-	public String lockEntity(LockableEntityClientImpl entity);
+	public String lockEntity(LockableEntity entity);
 	
 	
-	public boolean unlockEntity(LockableEntityClientImpl entity);
+	public boolean unlockEntity(LockableEntity entity);
 	
 	
 	/**

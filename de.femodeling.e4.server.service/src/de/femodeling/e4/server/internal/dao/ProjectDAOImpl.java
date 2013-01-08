@@ -11,6 +11,7 @@ import org.w3c.dom.NodeList;
 
 import de.femodeling.e4.model.core.Project.State;
 import de.femodeling.e4.model.core.Project.Type;
+import de.femodeling.e4.model.core.parameter.Parameter;
 import de.femodeling.e4.model.xml.XmlFile;
 import de.femodeling.e4.server.internal.model.ProjectServerImpl;
 import de.femodeling.e4.util.file.FileService;
@@ -195,6 +196,9 @@ public class ProjectDAOImpl extends XmlFile implements ProjectDAOIF {
 						project.addCadPath(childElement.getTextContent());
 						
 					}
+					else if(childElement.getTagName().equals(new Parameter().getTagName())){
+						project.setParameter(new Parameter(childElement));
+					}
 					
 				}
 				
@@ -222,6 +226,7 @@ public class ProjectDAOImpl extends XmlFile implements ProjectDAOIF {
 			e.appendChild(cad_path);
 		}
 		
+		e.appendChild(project.getParameter().toDomElement(doc));
 		
 		return e;
 	  }

@@ -11,6 +11,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import de.femodeling.e4.model.core.parameter.Parameter;
 import de.femodeling.e4.model.core.part.Material;
 import de.femodeling.e4.model.core.part.Part;
 import de.femodeling.e4.model.core.part.Representation;
@@ -232,6 +233,10 @@ public class PartDAOImpl extends XmlFile implements PartDAOIF {
 						Translation trans=new Translation();trans.init(childElement);
 						part.setTranslation(trans);
 					}
+					//Parameter
+					else if(childElement.getTagName().equals(new Parameter().getTagName())){
+						part.setParameter(new Parameter(childElement));
+					}
 					
 				}
 			}
@@ -282,8 +287,13 @@ public class PartDAOImpl extends XmlFile implements PartDAOIF {
 		//Translation
 		if(part.getTranslation()!=null)
 			e.appendChild(part.getTranslation().toDomElement(doc));
+		//Parameter
+		e.appendChild(part.getParameter().toDomElement(doc));
+		
 		
 		e.setAttribute("id", part.getLockableId());
+		
+		
 		
 		return e;
 	  }

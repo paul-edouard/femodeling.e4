@@ -29,6 +29,7 @@ public class ConnectionElementTransformService {
 		//Lock entity
 		e.setLockableId(ent.getLockableId());
 		e.setSessionId(ent.getSessionId());
+		e.setParameter(ent.getParameter());
 		
 		return e;
 	}
@@ -58,6 +59,7 @@ public class ConnectionElementTransformService {
 		//Lock entity
 		e.setLockableId(ent.getLockableId());
 		e.setSessionId(ent.getSessionId());
+		e.setParameter(ent.getParameter());
 		
 		return e;
 	}

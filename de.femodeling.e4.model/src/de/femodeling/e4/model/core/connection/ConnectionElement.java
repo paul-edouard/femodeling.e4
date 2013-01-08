@@ -3,9 +3,9 @@ package de.femodeling.e4.model.core.connection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import de.femodeling.e4.model.core.LockableEntity;
+import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
 
-public class ConnectionElement extends LockableEntity {
+public class ConnectionElement extends LockableEntityProChanSupp {
 	
 	 /** The serial version UID. */
     private static final long serialVersionUID = 1L;
@@ -17,6 +17,7 @@ public class ConnectionElement extends LockableEntity {
 	protected HashMap<String, ConnectionPart> partMap=new HashMap<String, ConnectionPart>();
 	protected HashMap<String, ConnectionZSB> zsbMap=new HashMap<String, ConnectionZSB>();
 	protected LinkedList<ConnectionSupportPoint> supportPointList=new LinkedList<ConnectionSupportPoint>();
+		
 	
 	public String getVtaTable() {
 		return vtaTable;

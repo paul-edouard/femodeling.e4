@@ -1,16 +1,28 @@
 package de.femodeling.e4.model.core.assembly;
 
-import de.femodeling.e4.model.core.LockableEntity;
+import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
 
 
 
-public abstract class Assembly extends LockableEntity {
+public abstract class Assembly extends LockableEntityProChanSupp {
 	
 	static final long serialVersionUID=1L;
 	
 	private AssNode root;
 	
-	public enum Type { PDMU, FE_MODULE, NONE};
+	public enum Type { PDMU(1), FE_MODULE(2), NONE(0);
+		private int value;    
+
+	  private Type(int value) {
+	    this.value = value;
+	  }
+
+	  public int getValue() {
+	    return value;
+	  }
+
+	
+	};
 	private Type type;
 	
 	static final String PDMUStr="pdmu";

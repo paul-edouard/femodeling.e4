@@ -10,11 +10,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
+import de.femodeling.e4.model.core.parameter.Parameter;
 import de.femodeling.e4.model.xml.XmlElementIF;
 
 
 
-public class AssNode implements XmlElementIF, Serializable {
+public class AssNode extends LockableEntityProChanSupp implements XmlElementIF, Serializable {
 	
 	static final long serialVersionUID=1L;
 	public static final String ROOT_ID="root";
@@ -223,6 +225,9 @@ public class AssNode implements XmlElementIF, Serializable {
 						AssEdge e=new AssEdge(chilElement);
 						addEdge(e);
 					}
+					else if(chilElement.getTagName().equals(new Parameter().getTagName())){
+						this.setParameter(new Parameter(chilElement));
+					}
 					
 				}
 			}
@@ -257,6 +262,8 @@ public class AssNode implements XmlElementIF, Serializable {
 			e.appendChild(child);
 			
 		}
+		
+		e.appendChild(this.getParameter().toDomElement(Doc));
 
 		return e;
 	}

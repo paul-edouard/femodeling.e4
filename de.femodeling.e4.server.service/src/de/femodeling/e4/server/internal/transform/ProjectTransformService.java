@@ -51,6 +51,8 @@ public class ProjectTransformService {
 			p.setChilds(p_dto_list);
 		}
 		
+		p.setParameter(ent.getParameter());
+		
 		return p;
 	}
 	
@@ -87,6 +89,7 @@ public class ProjectTransformService {
 		
 		p.setName(ent.getName());
 		
+		p.setParameter(ent.getParameter());
 		
 		return p;
 		

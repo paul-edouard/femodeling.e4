@@ -1,8 +1,7 @@
 package de.femodeling.e4.server.internal.transform;
 
-import de.femodeling.e4.model.core.LockableEntity;
 import de.femodeling.e4.model.core.Message;
-import de.femodeling.e4.model.dto.LockableEntityDTO;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 import de.femodeling.e4.model.dto.MessageDTO;
 import de.femodeling.e4.model.dto.MessageDTOImpl;
 import de.femodeling.e4.model.dto.PartDTO;
@@ -29,13 +28,15 @@ public class MessageTransformService {
 			m.setSendingEntity(p_dto);
 		}
 		else if(mes.getSendingEntity() instanceof LockableEntity){
-			LockableEntityDTO l_dto=LockTransformService.transform( mes.getSendingEntity());
+			LockableEntity l_dto=LockTransformService.copy( mes.getSendingEntity());
 			m.setSendingEntity(l_dto);
 		}
 		
 		m.setSendingSessionId(mes.getSendingSessionId());
 		m.setSendingType(mes.getSendingType());
 		m.setParentId(mes.getParentId());
+		
+		m.setParameter(mes.getParameter());
 		
 		return m;
 	}
@@ -55,7 +56,7 @@ public class MessageTransformService {
 			PartServerImpl p_s=PartTransformService.transform((PartDTO)  mes.getSendingEntity());
 			m.setSendingEntity(p_s);
 		}
-		else if(mes.getSendingEntity() instanceof LockableEntityDTO){
+		else if(mes.getSendingEntity() instanceof LockableEntity){
 			LockableEntity l_dto=LockTransformService.transform(mes.getSendingEntity());
 			m.setSendingEntity(l_dto);
 		}
@@ -63,6 +64,8 @@ public class MessageTransformService {
 		m.setSendingSessionId(mes.getSendingSessionId());
 		m.setSendingType(mes.getSendingType());
 		m.setParentId(mes.getParentId());
+		
+		m.setParameter(mes.getParameter());
 		
 		return m;
 	}

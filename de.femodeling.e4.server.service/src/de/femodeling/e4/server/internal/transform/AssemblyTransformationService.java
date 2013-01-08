@@ -22,7 +22,7 @@ public class AssemblyTransformationService {
 		//Lock entity
 		a.setLockableId(ent.getLockableId());
 		a.setSessionId(ent.getSessionId());
-		
+		a.setParameter(ent.getParameter());
 		
 		return a;
 		
@@ -41,6 +41,7 @@ public class AssemblyTransformationService {
 		//Lock entity
 		a.setLockableId(ent.getLockableId());
 		a.setSessionId(ent.getSessionId());
+		a.setParameter(ent.getParameter());
 		
 		return a;
 		

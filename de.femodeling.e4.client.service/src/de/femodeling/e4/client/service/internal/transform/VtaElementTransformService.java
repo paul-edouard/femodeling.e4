@@ -32,6 +32,7 @@ public class VtaElementTransformService {
 		//Lock entity
 		e.setLockableId(ent.getLockableId());
 		e.setSessionId(ent.getSessionId());
+		e.setParameter(ent.getParameter());
 		
 		return e;
 	}
@@ -63,6 +64,7 @@ public class VtaElementTransformService {
 		//Lock entity
 		e.setLockableId(ent.getLockableId());
 		e.setSessionId(ent.getSessionId());
+		e.setParameter(ent.getParameter());
 		
 		return e;
 	}

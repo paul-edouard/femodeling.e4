@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import de.femodeling.e4.model.dto.LockableEntityDTO;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 import de.femodeling.e4.server.internal.context.ServerContextProvider;
 import de.femodeling.e4.server.internal.dao.LockableEntityDAOIF;
 import de.femodeling.e4.server.internal.dao.LockableEntityDAOImpl;
@@ -55,7 +55,7 @@ public class LockRemoteService implements LockRemoteServiceIF {
 	}
 	
 	
-	synchronized public LockableEntityDTO lockEntity( LockableEntityDTO ent){
+	synchronized public LockableEntity lockEntity( LockableEntity ent){
 		
 		logger.info("Lock started from session:"+ServerContextProvider.getServerContext().getSessionId());
 		LockableEntityDAOIF lockableEntityDAO=RegisterServerDAOService.INSTANCE.getLockableEntityDAO();
@@ -86,7 +86,7 @@ public class LockRemoteService implements LockRemoteServiceIF {
 	}
 	
 	
-	synchronized public  boolean unlockEntity(final LockableEntityDTO ent){
+	synchronized public  boolean unlockEntity(final LockableEntity ent){
 		
 		logger.info("unlock started from session:"+ServerContextProvider.getServerContext().getSessionId());
 		LockableEntityDAOIF lockableEntityDAO=RegisterServerDAOService.INSTANCE.getLockableEntityDAO();

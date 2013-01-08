@@ -34,6 +34,8 @@ public class ProjectTransformService {
 		p.setType(ent.getType());
 		p.setCadPaths(ent.getCadPaths());
 		
+		p.setParameter(ent.getParameter());
+		
 		//logger.debug("Project DTO name: "+ent.getName());
 		//logger.debug("Project Client name: "+p.getName());
 		
@@ -73,6 +75,7 @@ public class ProjectTransformService {
 		p.setState(ent.getState());
 		p.setType(ent.getType());
 		p.setCadPaths(ent.getCadPaths());
+		p.setParameter(ent.getParameter());
 		
 		return p;
 	}
@@ -90,6 +93,7 @@ public class ProjectTransformService {
 		p.setParent(ent.getParent());
 		p.setChilds(ent.getChilds());
 		p.setName(ent.getName(),false);
+		p.setParameter(ent.getParameter());
 		
 		
 		return p;
@@ -109,6 +113,7 @@ public class ProjectTransformService {
 		
 		//Copy the new name And update the path is the name has changed
 		target.setName(input.getName(),true);
+		target.setParameter(input.getParameter());
 	}
 	
 

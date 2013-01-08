@@ -6,9 +6,9 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
-import de.femodeling.e4.model.core.LockableEntity;
 import de.femodeling.e4.model.core.Message;
 import de.femodeling.e4.model.core.Message.Type;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 import de.femodeling.e4.server.internal.context.ServerContextProvider;
 import de.femodeling.e4.server.internal.model.MessageServerImpl;
 

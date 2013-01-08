@@ -3,7 +3,7 @@ package de.femodeling.e4.server.service.remote;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import de.femodeling.e4.model.dto.LockableEntityDTO;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 
 
 public interface LockRemoteServiceIF extends Serializable {
@@ -14,7 +14,7 @@ public interface LockRemoteServiceIF extends Serializable {
 	 * @param ent
 	 * @return null on success or return the already locked entity on error
 	 */
-	public LockableEntityDTO lockEntity( LockableEntityDTO ent);
+	public LockableEntity lockEntity( LockableEntity ent);
 	
 	
 	/**
@@ -23,7 +23,7 @@ public interface LockRemoteServiceIF extends Serializable {
 	 * @param ent
 	 * @return true on success or false on error
 	 */
-	public  boolean unlockEntity(final LockableEntityDTO ent);
+	public  boolean unlockEntity(final LockableEntity ent);
 	
 	
 	/**

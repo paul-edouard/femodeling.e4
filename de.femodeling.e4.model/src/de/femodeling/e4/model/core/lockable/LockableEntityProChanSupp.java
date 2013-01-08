@@ -1,4 +1,4 @@
-package de.femodeling.e4.client.model;
+package de.femodeling.e4.model.core.lockable;
 
 //import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -6,13 +6,12 @@ import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.femodeling.e4.client.model.listener.LockableEntityListenerIF;
-import de.femodeling.e4.model.core.LockableEntity;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 
 
 
 
-public class LockableEntityClientImpl extends LockableEntity /*implements PropertyChangeListener */{
+public class LockableEntityProChanSupp extends LockableEntity /*implements PropertyChangeListener */{
 	
 	static final long serialVersionUID=1L;
 	

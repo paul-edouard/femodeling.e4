@@ -3,9 +3,11 @@ package de.femodeling.e4.model.core;
 import java.io.File;
 import java.util.LinkedList;
 
+import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
 
 
-public abstract class Project extends LockableEntity{
+
+public abstract class Project extends  LockableEntityProChanSupp{
 	
 	public enum State { STARTED , ACTIVATED, FINISHED, DELETED }
 	public enum Type { ROOT, GROUP, CARLINE, DATA_LEVEL,NONE }
@@ -32,7 +34,8 @@ public abstract class Project extends LockableEntity{
     
     private LinkedList<String> cadPaths=new LinkedList<String>();
     
-
+    
+    
 	public State getState() {
 		return state;
 	}

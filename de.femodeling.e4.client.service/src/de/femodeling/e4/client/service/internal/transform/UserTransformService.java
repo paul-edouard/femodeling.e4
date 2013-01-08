@@ -26,6 +26,8 @@ public class UserTransformService {
 		userDTO.setPhonenumber(ent.getPhonenumber());
 		userDTO.setRoles(ent.getRoles());
 		userDTO.setSurname(ent.getSurname());
+		
+		userDTO.setParameter(ent.getParameter());
 
 		return userDTO;
 
@@ -44,6 +46,8 @@ public class UserTransformService {
 		user.setPhonenumber(ent.getPhonenumber());
 		user.setRoles(ent.getRoles());
 		user.setSurname(ent.getSurname());
+		
+		user.setParameter(ent.getParameter());
 
 		return user;
 
@@ -75,6 +79,8 @@ public class UserTransformService {
 		target.setPhonenumber(input.getPhonenumber());
 		target.setRoles(input.getRoles());
 		target.setSurname(input.getSurname());
+		target.setParameter(input.getParameter());
+		
 
 	}
 

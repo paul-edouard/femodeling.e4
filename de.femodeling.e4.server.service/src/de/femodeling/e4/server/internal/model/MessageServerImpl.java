@@ -2,8 +2,8 @@ package de.femodeling.e4.server.internal.model;
 
 import java.util.Calendar;
 
-import de.femodeling.e4.model.core.LockableEntity;
 import de.femodeling.e4.model.core.Message;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 
 
 public class MessageServerImpl extends Message {

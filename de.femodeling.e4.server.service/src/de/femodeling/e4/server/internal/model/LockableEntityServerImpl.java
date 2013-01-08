@@ -3,7 +3,7 @@ package de.femodeling.e4.server.internal.model;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import de.femodeling.e4.model.core.LockableEntity;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 import de.femodeling.e4.model.xml.XmlElementIF;
 
 

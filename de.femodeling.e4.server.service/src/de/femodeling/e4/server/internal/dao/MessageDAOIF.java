@@ -3,8 +3,8 @@ package de.femodeling.e4.server.internal.dao;
 import java.util.Date;
 import java.util.LinkedList;
 
-import de.femodeling.e4.model.core.LockableEntity;
 import de.femodeling.e4.model.core.Message;
+import de.femodeling.e4.model.core.lockable.LockableEntity;
 
 public interface MessageDAOIF {
 	

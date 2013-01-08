@@ -1,9 +1,10 @@
 package de.femodeling.e4.model.core;
 
-import java.io.Serializable;
 import java.util.HashSet;
 
-public abstract class User implements Serializable {
+import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
+
+public abstract class User extends  LockableEntityProChanSupp {
 
 	/** The serial version UID. */
 	private static final long serialVersionUID = 1L;
@@ -21,6 +22,7 @@ public abstract class User implements Serializable {
 	protected String phonenumber;
 	protected HashSet<String> roles;
 	protected String surname;
+	
 
 	public String getForename() {
 		return forename;
@@ -85,5 +87,8 @@ public abstract class User implements Serializable {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+
+	
 
 }

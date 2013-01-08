@@ -40,6 +40,7 @@ public class PartTransformService {
 		//Lock entity
 		p.setLockableId(ent.getLockableId());
 		p.setSessionId(ent.getSessionId());
+		p.setParameter(ent.getParameter());
 		
 		return p;
 		
@@ -81,6 +82,7 @@ public class PartTransformService {
 		//Lock entity
 		p.setLockableId(ent.getLockableId());
 		p.setSessionId(ent.getSessionId());
+		p.setParameter(ent.getParameter());
 		
 		return p;
 		
@@ -119,6 +121,7 @@ public class PartTransformService {
 		//Lock entity
 		p.setLockableId(ent.getLockableId());
 		p.setSessionId(ent.getSessionId());
+		p.setParameter(ent.getParameter());
 		
 		//Weight list
 		for(Weight w:ent.getWeightList())
@@ -157,6 +160,7 @@ public class PartTransformService {
 		//Lock entity
 		target.setLockableId(input.getLockableId());
 		target.setSessionId(input.getSessionId());
+		target.setParameter(input.getParameter());
 		
 		//Weight list
 		target.setWeightList(input.getWeightList());

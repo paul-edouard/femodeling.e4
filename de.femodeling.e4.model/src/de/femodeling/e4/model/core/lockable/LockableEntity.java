@@ -1,7 +1,9 @@
-package de.femodeling.e4.model.core;
+package de.femodeling.e4.model.core.lockable;
 
 import java.io.Serializable;
 import java.util.UUID;
+
+import de.femodeling.e4.model.core.parameter.Parameter;
 
 
 public abstract class LockableEntity implements Serializable{
@@ -11,6 +13,18 @@ public abstract class LockableEntity implements Serializable{
     
     private String lockableId=UUID.randomUUID().toString();
 	private String sessionId;
+	
+	
+	protected Parameter parameter;
+	    
+	public Parameter getParameter() {
+			if(parameter==null)parameter=Parameter.createRoot(this.getClass());
+			return parameter;
+	}
+
+	public void setParameter(Parameter parameter) {
+			this.parameter = parameter;
+	}
 	
 	
 	public String getLockableId() {

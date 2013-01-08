@@ -1,33 +1,25 @@
 package de.femodeling.e4.client.model.core;
 
 
-import de.femodeling.e4.client.model.LockableEntityClientImpl;
-import de.femodeling.e4.model.core.assembly.Assembly.Type;
+import de.femodeling.e4.model.core.assembly.AssNode;
+import de.femodeling.e4.model.core.assembly.Assembly;
 
-public abstract class AssemblyClient extends LockableEntityClientImpl {
+public abstract class AssemblyClient extends Assembly {
 	
 	/** The serial version UID. */
     private static final long serialVersionUID = 1L;
-    private Type type;
-    
-    private AssNodeClient root;
-    
-    
 
+	@Override
 	public AssNodeClient getRoot() {
-		return root;
+		AssNode root= super.getRoot();
+		if(root instanceof AssNodeClient){
+			return (AssNodeClient) root;
+		}
+		
+		return null;
 	}
-
-	public void setRoot(AssNodeClient root) {
-		this.root = root;
-	}
+   
     
-	public Type getType() {
-		return type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
-	}
+    
 	
 }

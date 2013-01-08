@@ -2,16 +2,16 @@ package de.femodeling.e4.model.core.part;
 
 import java.util.LinkedList;
 
-import de.femodeling.e4.model.core.LockableEntity;
+import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
 
 
-public abstract class Part extends LockableEntity{
+
+public abstract class Part extends LockableEntityProChanSupp{
 	
 	 /** The serial version UID. */
     private static final long serialVersionUID = 1L;
     
-   
-	
+
 	static final String GroupStr="group";
 	static final String ModelStr="model";
 	static final String PartialModelStr="partial_model";
@@ -40,7 +40,10 @@ public abstract class Part extends LockableEntity{
 	protected Translation translation=new Translation();
 	protected boolean isCadFileFound;
 	    
-	    
+	
+
+	
+	
 		public boolean isCadFileFound() {
 			return isCadFileFound;
 		}
@@ -165,8 +168,15 @@ public abstract class Part extends LockableEntity{
 	}
 	
 	public void addRepresentation(Representation rep){
-		if(representationList==null)representationList=new LinkedList<Representation>();
-		representationList.add(rep);
+		LinkedList<Representation> toremove=new LinkedList<Representation>();
+		for(Representation content:this.getRepresentationList()){
+			if(content.getId()==rep.getId())
+				toremove.add(content);
+		}
+		
+		this.getRepresentationList().removeAll(toremove);
+		
+		this.getRepresentationList().add(rep);
 	}
 	
 		

@@ -43,6 +43,7 @@ public class PartTransformService {
 		//Lock entity
 		p.setLockableId(ent.getLockableId());
 		p.setSessionId(ent.getSessionId());
+		p.setParameter(ent.getParameter());
 		
 		return p;
 	}
@@ -90,6 +91,7 @@ public class PartTransformService {
 		//Lock entity
 		p.setLockableId(ent.getLockableId());
 		p.setSessionId(ent.getSessionId());
+		p.setParameter(ent.getParameter());
 		
 		return p;
 		

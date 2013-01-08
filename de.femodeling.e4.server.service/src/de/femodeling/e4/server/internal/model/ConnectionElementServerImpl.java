@@ -11,6 +11,7 @@ import de.femodeling.e4.model.core.connection.ConnectionParameter;
 import de.femodeling.e4.model.core.connection.ConnectionPart;
 import de.femodeling.e4.model.core.connection.ConnectionSupportPoint;
 import de.femodeling.e4.model.core.connection.ConnectionZSB;
+import de.femodeling.e4.model.core.parameter.Parameter;
 import de.femodeling.e4.model.xml.XmlElementIF;
 
 
@@ -58,6 +59,9 @@ public class ConnectionElementServerImpl extends ConnectionElement implements Xm
 					}
 					else if(chilElement.getTagName().equals("SupportPoints")){
 						readSupportPoints(chilElement);
+					}
+					else if(chilElement.getTagName().equals(new Parameter().getTagName())){
+						this.setParameter(new Parameter(chilElement));
 					}
 				}
 			}
@@ -192,7 +196,7 @@ public class ConnectionElementServerImpl extends ConnectionElement implements Xm
 			e_c.appendChild(e_point);
 		}
 		
-		
+		e.appendChild(this.getParameter().toDomElement(doc));
 		
 		return e;
 	}

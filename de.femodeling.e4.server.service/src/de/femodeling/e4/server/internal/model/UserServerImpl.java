@@ -4,8 +4,11 @@ import java.util.HashSet;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import de.femodeling.e4.model.core.User;
+import de.femodeling.e4.model.core.parameter.Parameter;
 import de.femodeling.e4.model.xml.XmlElementIF;
 
 
@@ -54,6 +57,8 @@ public class UserServerImpl extends User implements XmlElementIF {
 
 		Project.setAttribute("groups", this.groups.toString());
 		Project.setAttribute("roles", this.roles.toString());
+		
+		Project.appendChild(this.getParameter().toDomElement(doc));
 
 		return Project;
 	}
@@ -72,6 +77,21 @@ public class UserServerImpl extends User implements XmlElementIF {
 
 		this.groups = stringToSet(el.getAttribute("groups"));
 		this.roles = stringToSet(el.getAttribute("roles"));
+		
+		NodeList Children=el.getChildNodes();
+
+		for(int i=0;i<Children.getLength();i++){
+			Node child = Children.item(i);
+			if(child instanceof Element){
+				Element chilElement=(Element)child;
+				
+				if(chilElement.getTagName().equals(new Parameter().getTagName())){
+					this.setParameter(new Parameter(chilElement));
+				}
+				
+			}
+		}
+		
 
 	}
 

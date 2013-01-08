@@ -24,6 +24,7 @@ public class AssemblyTransformationService {
 		//Lock entity
 		a.setLockableId(ent.getLockableId());
 		a.setSessionId(ent.getSessionId());
+		a.setParameter(ent.getParameter());
 		
 		return a;
 		
@@ -41,6 +42,7 @@ public class AssemblyTransformationService {
 		//Lock entity
 		a.setLockableId(ent.getLockableId());
 		a.setSessionId(ent.getSessionId());
+		a.setParameter(ent.getParameter());
 		
 		return a;
 		
@@ -58,6 +60,7 @@ public class AssemblyTransformationService {
 		a_n.setModuleId(ent.getModuleId());
 		a_n.setUuid(ent.getUuid());
 		a_n.setWeight(ent.getWeight());
+		a_n.setParameter(ent.getParameter());
 		
 		if(recursive){
 			for(AssEdge c:ent.getEdgeList())
@@ -79,7 +82,7 @@ public class AssemblyTransformationService {
 		a_n.setModuleId(ent.getModuleId());
 		a_n.setUuid(ent.getUuid());
 		a_n.setWeight(ent.getWeight());
-		
+		a_n.setParameter(ent.getParameter());
 		
 		if(recursive){
 			for(AssEdge c:ent.getEdgeList())
