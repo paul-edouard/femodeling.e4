@@ -11,7 +11,9 @@ import org.eclipse.swt.graphics.TextStyle;
 import de.femodeling.e4.bundleresourceloader.IBundleResourceLoader;
 import de.femodeling.e4.client.model.UserClientImpl;
 import de.femodeling.e4.client.model.core.UserClientGroup;
+import de.femodeling.e4.client.service.IUserProvider;
 import de.femodeling.e4.client.ui.IImageKeys;
+import de.femodeling.e4.model.core.User;
 
 
 public class UsersTreeLabelProvider extends StyledCellLabelProvider {
@@ -19,21 +21,30 @@ public class UsersTreeLabelProvider extends StyledCellLabelProvider {
 	// Images
 	private Image userGroupImage;
 	private Image userImage;
+	private Image userAdminImage;
+	private Image userCurrentImage;
+	
+	private IUserProvider provider;
 	
 	Styler online;
 	
 
-	public UsersTreeLabelProvider(IBundleResourceLoader loader) {
+	public UsersTreeLabelProvider(IBundleResourceLoader loader, IUserProvider provider) {
 		super();
 		
 		userGroupImage=loader.loadImage(getClass(), IImageKeys.USER_GROUP);
 		userImage=loader.loadImage(getClass(), IImageKeys.USER);
+		userAdminImage=loader.loadImage(getClass(), IImageKeys.USER_SUIT);
+		userCurrentImage=loader.loadImage(getClass(), IImageKeys.USER_GREEN);
+		
+		
+		this.provider=provider;
 		
 		online=new Styler() {
 			
 			@Override
 			public void applyStyles(TextStyle textStyle) {
-				textStyle.foreground=new Color(null, 0, 0, 150);
+				textStyle.foreground=new Color(null, 0, 0, 190);
 			}
 		};
 		
@@ -57,8 +68,16 @@ public class UsersTreeLabelProvider extends StyledCellLabelProvider {
 			UserClientImpl user = (UserClientImpl) element;
 			text.append(user.getId() + ": " + user.getForename() + ", "
 					+ user.getSurname());
-		
-			cell.setImage(userImage);
+			
+			if(user.getRoles().contains(User.ADMIN)){
+				cell.setImage(userAdminImage);
+			}
+			else if(provider.getCurrentUser().getId().equals(user.getId())){
+				cell.setImage(userCurrentImage);
+			}
+			else{ 
+				cell.setImage(userImage);
+			}
 			if (user.isOnline()) {
 				text.append(" (" + "online" + ") ", online);
 				

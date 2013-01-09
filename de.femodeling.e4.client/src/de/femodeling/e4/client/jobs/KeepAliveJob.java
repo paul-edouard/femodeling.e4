@@ -10,13 +10,13 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.services.events.IEventBroker;
 
 import de.femodeling.e4.client.model.ClientSession;
+import de.femodeling.e4.client.model.broker.IBrokerEvents;
 import de.femodeling.e4.server.service.RemoteService;
 
 public class KeepAliveJob extends Job {
 
 	private static Logger logger = Logger.getLogger(KeepAliveJob.class);
 	
-	public static final String ONLINE_STATE="ONLINE_STATE";
 	
 	public static final int RESTART_TIMEOUT=30000;
 	
@@ -56,13 +56,13 @@ public class KeepAliveJob extends Job {
 		try{
 			
 			remoteService.getSessionService().keepAlive(session.getSessionId());
-			eventBroker.post(ONLINE_STATE, State.ONLINE);
+			eventBroker.post(IBrokerEvents.ONLINE_STATE, State.ONLINE);
 				
 		}
 		catch(Exception e){
 			e.printStackTrace();
 			
-			eventBroker.post(ONLINE_STATE, State.OFFLINE);
+			eventBroker.post(IBrokerEvents.ONLINE_STATE, State.OFFLINE);
 			
 			return Status.CANCEL_STATUS;
 			

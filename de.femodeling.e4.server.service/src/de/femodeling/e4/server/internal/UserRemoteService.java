@@ -79,7 +79,8 @@ public class UserRemoteService implements UserRemoteServiceIF {
 	}
 
 	public UserDTO getCurrentUser() {
-
+		if(ServerContextProvider.getServerContext()==null)return null;
+		
 		String userId = ServerContextProvider.getServerContext().getUserId();
 		UserDAOIF userDAO = RegisterServerDAOService.INSTANCE.getUserDAO();
 		UserServerImpl u = userDAO.loadUser(userId);

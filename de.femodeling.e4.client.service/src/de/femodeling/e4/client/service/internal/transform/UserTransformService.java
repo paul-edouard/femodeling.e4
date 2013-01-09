@@ -27,7 +27,7 @@ public class UserTransformService {
 		userDTO.setRoles(ent.getRoles());
 		userDTO.setSurname(ent.getSurname());
 		
-		userDTO.setParameter(ent.getParameter());
+		userDTO.setParameter(ent.getParameter().createCopy());
 
 		return userDTO;
 
@@ -47,7 +47,7 @@ public class UserTransformService {
 		user.setRoles(ent.getRoles());
 		user.setSurname(ent.getSurname());
 		
-		user.setParameter(ent.getParameter());
+		user.setParameter(ent.getParameter().createCopy());
 
 		return user;
 
@@ -79,9 +79,16 @@ public class UserTransformService {
 		target.setPhonenumber(input.getPhonenumber());
 		target.setRoles(input.getRoles());
 		target.setSurname(input.getSurname());
-		target.setParameter(input.getParameter());
+		target.setParameter(input.getParameter().createCopy());
+		target.setOnline(input.isOnline());
 		
-
 	}
+	
+	public static UserClientImpl makeCopy(UserClientImpl input){
+		UserClientImpl user = new UserClientImpl();
+		copyData(input,user);
+		return user;
+	}
+	
 
 }

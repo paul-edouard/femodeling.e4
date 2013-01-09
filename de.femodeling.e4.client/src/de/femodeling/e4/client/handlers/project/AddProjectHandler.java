@@ -50,6 +50,7 @@ public class AddProjectHandler {
 	}
 	
 	
+	
 	@Inject
 	public void analyseSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) 
 	ISelection selection){

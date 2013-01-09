@@ -23,6 +23,7 @@ import de.femodeling.e4.bundleresourceloader.IBundleResourceLoader;
 import de.femodeling.e4.client.jobs.KeepAliveJob;
 import de.femodeling.e4.client.jobs.KeepAliveJob.State;
 import de.femodeling.e4.client.model.ClientSession;
+import de.femodeling.e4.client.model.broker.IBrokerEvents;
 import de.femodeling.e4.client.ui.IImageKeys;
 
 public class ConnectionStateToolItem {
@@ -70,7 +71,7 @@ public class ConnectionStateToolItem {
 	}
 	
 	@Inject
-	private void setConnectionState(@Optional  @UIEventTopic(KeepAliveJob.ONLINE_STATE)State state, ClientSession session){
+	private void setConnectionState(@Optional  @UIEventTopic(IBrokerEvents.ONLINE_STATE)State state, ClientSession session){
 		if(tltmDropdownItem==null)return;
 		
 		if(lastState==null || lastState!=state ){

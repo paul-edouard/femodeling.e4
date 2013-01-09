@@ -1,11 +1,15 @@
 package de.femodeling.e4.client.service.internal.dataprovider;
 
+import java.util.Collection;
+
 import org.apache.log4j.Logger;
 
 import de.femodeling.e4.client.model.UserClientImpl;
 import de.femodeling.e4.client.service.internal.transform.UserTransformService;
+import de.femodeling.e4.ui.dataprovider.cache.ICacheEntryInformation;
 import de.femodeling.e4.ui.dataprovider.cache.SimpleCachingStrategy;
 import de.femodeling.e4.ui.dataprovider.key.IKey;
+import de.femodeling.e4.ui.dataprovider.key.UUIDCollectionKey;
 
 public class UserCachingStrategy extends SimpleCachingStrategy {
 	
@@ -26,6 +30,27 @@ public class UserCachingStrategy extends SimpleCachingStrategy {
 		
 		return target;
 	}
+
+
+	@Override
+	public void registerCachedData(IKey key, Object data,
+			ICacheEntryInformation cacheEntryInformation) {
+		
+		if(data instanceof UserClientImpl){
+			UserClientImpl input=(UserClientImpl) data;
+		
+			//logger.debug("Update the collection: "+input.getType());
+			Collection col=(Collection) this.getCachedData(new UUIDCollectionKey(input.getType()));
+			if(col!=null && !col.contains(key))
+				col.add(key);
+		}
+		
+		
+		// TODO Auto-generated method stub
+		super.registerCachedData(key, data, cacheEntryInformation);
+	}
+	
+	
 	
 
 }

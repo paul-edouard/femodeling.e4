@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -48,6 +51,9 @@ public class ProjectsPart {
 	
 	@Inject
 	ESelectionService selectionService;
+	
+	@Inject
+	EPartService service;
 	
 	private TreeViewer treeViewer;
 	
@@ -147,6 +153,17 @@ public class ProjectsPart {
 						}
 						
 						
+						
+					}
+					else if(item instanceof ProjectClientImpl){
+						
+						ProjectClientImpl selectedProject=(ProjectClientImpl) item;
+						
+						MPart part = service
+								.createPart("de.femodeling.e4.client.partdescriptor.projecteditor");
+						part.setLabel(selectedProject.getName());
+
+						service.showPart(part, PartState.ACTIVATE);
 						
 					}
 					

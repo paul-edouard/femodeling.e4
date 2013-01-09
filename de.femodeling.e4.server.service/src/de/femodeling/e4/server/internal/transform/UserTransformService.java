@@ -21,7 +21,7 @@ public class UserTransformService {
 		userDTO.setPhonenumber(userImpl.getPhonenumber());
 		userDTO.setRoles(userImpl.getRoles());
 		userDTO.setSurname(userImpl.getSurname());
-		userDTO.setParameter(userImpl.getParameter());
+		userDTO.setParameter(userImpl.getParameter().createCopy());
 		
 
 		return userDTO;
@@ -41,7 +41,7 @@ public class UserTransformService {
 		userImpl.setPhonenumber(userDTO.getPhonenumber());
 		userImpl.setRoles(userDTO.getRoles());
 		userImpl.setSurname(userDTO.getSurname());
-		userImpl.setParameter(userDTO.getParameter());
+		userImpl.setParameter(userDTO.getParameter().createCopy());
 
 		return userImpl;
 

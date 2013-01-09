@@ -156,6 +156,7 @@ public class UserClientImpl extends UserClient {
 		user.setRoles(Utils.copySet(this.getRoles()));
 		user.setSurname(this.getSurname());
 		user.setParameter(this.getParameter().createCopy());
+		user.setOnline(this.isOnline());
 
 		return user;
 	}
@@ -214,5 +215,7 @@ public class UserClientImpl extends UserClient {
 		}
 
 	}
+
+	
 
 }

@@ -34,7 +34,7 @@ public class ClientServiceProcessor {
 		
 		//User Provider service initialization
 		logger.info("----->User Provider service initialization");
-		userProvider.init(registery, service);
+		userProvider.init(registery, service,session);
 		
 		//Start the message service
 		logger.info("Start of message service");

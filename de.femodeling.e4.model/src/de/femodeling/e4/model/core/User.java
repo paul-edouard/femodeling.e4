@@ -8,6 +8,7 @@ public abstract class User extends  LockableEntityProChanSupp {
 
 	/** The serial version UID. */
 	private static final long serialVersionUID = 1L;
+	
 
 	public static String ADMIN = "Admin";
 	public static String DATA_MANAGER = "Data Manager";
@@ -87,6 +88,17 @@ public abstract class User extends  LockableEntityProChanSupp {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+	@Override
+	public String toString() {
+		return "User [forename=" + forename + ", groups=" + groups + ", id="
+				+ id + ", location=" + location + ", password=" + password
+				+ ", phonenumber=" + phonenumber + ", roles=" + roles
+				+ ", surname=" + surname + ", getParameter()=" + getParameter()
+				+ "]";
+	}
+
+	
 
 
 	

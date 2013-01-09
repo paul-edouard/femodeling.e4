@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import de.femodeling.e4.client.model.ClientSession;
 import de.femodeling.e4.client.model.UserClientImpl;
 import de.femodeling.e4.client.model.core.UserClient;
 import de.femodeling.e4.client.service.IClientService;
@@ -37,14 +38,13 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	public static final String DATA_ROOT = "user.root";
 	
 	
-	private UserClientImpl currentUser;
+	private String currentUserId="";
 	
 	private static IRegistery registery;
 	
 	private static IClientService service;
 	
-	//private static RemoteService remoteService;
-	
+	private static ClientSession session;
 	
 
 	public UserProvider() {
@@ -56,9 +56,10 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	 * @see de.femodeling.e4.client.service.internal.dataprovider.IUserProvider#init(de.femodeling.e4.ui.dataprovider.registery.IRegistery, de.femodeling.e4.client.service.IClientService)
 	 */
 	@Override
-	public void init(IRegistery registery,IClientService service){
+	public void init(IRegistery registery,IClientService service,ClientSession session){
 		this.registery=registery;
 		this.service=service;
+		this.session=session;
 		logger.info("User Provider initialized");
 	}
 	
@@ -73,7 +74,14 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	@Override
 	public UserClientImpl putData(UserClientImpl p){
 		Object user=getDefault().putData(new UUIDKey(p.getId()), p);
-		return (UserClientImpl) user;
+		
+		if(user==null)return null;
+		
+		//Update the corresponding data collection
+		UserClientImpl u=(UserClientImpl) user;
+		getDefault().getDataCollection(new UUIDCollectionKey(u.getType())).add(user);
+		
+		return u;
 	}
 	
 	/* (non-Javadoc)
@@ -131,8 +139,10 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 	 */
 	@Override
 	public UserClientImpl getCurrentUser(){
-		if(currentUser==null)currentUser=service.getUserClientService().getCurrentUser();
-		return currentUser;
+		if(currentUserId.isEmpty()){
+			currentUserId=session.getConnectionDetails().getUserId();
+		}
+		return getData(currentUserId);
 	}
 	
 	/* (non-Javadoc)
@@ -185,6 +195,7 @@ public class UserProvider implements IWritableDataProvider, IUserProvider {
 		}
 		else {
 			for(UserClientImpl u:userSet){
+				
 				if(u.getType().contains(collectionKey.toString())){
 					returnCollection.add(u);
 				}

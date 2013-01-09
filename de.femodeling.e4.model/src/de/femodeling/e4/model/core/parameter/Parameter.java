@@ -29,23 +29,23 @@ public class Parameter implements XmlElementIF, Serializable {
 	private Type type;
 	private Collection<Parameter> childs;
 	
-	public enum Type { INTEGER(1), STRING(2), FLOAT(3),NONE(0);
-		private int value;    
+	public enum Type implements Serializable{ INTEGER(1), STRING(2), FLOAT(3),NONE(0);
+		private int val;    
 
 	  private Type(int value) {
-	    this.value = value;
+	    this.val = value;
 	  }
 	  
 	  private void fromString(String value) {
-		    this.value = Integer.parseInt(value);
+		    this.val = Integer.parseInt(value);
 	  }
 
 	  public int getValue() {
-	    return value;
+	    return val;
 	  }
 	  
 	 public String toString(){
-		 return String.valueOf(value);
+		 return String.valueOf(val);
 	 }
 	
 	}; 
@@ -106,6 +106,7 @@ public class Parameter implements XmlElementIF, Serializable {
 	
 	public Parameter createCopy(){
 		Parameter param=new Parameter(this.getKey(),this.getValue(),this.getType());
+		
 		for(Parameter child:this.getChilds()){
 			param.addChild(child.createCopy());
 		}
@@ -131,6 +132,16 @@ public class Parameter implements XmlElementIF, Serializable {
 	}
 
 	public Type getType() {
+		//Get Type from value
+		if(type==Type.NONE){
+			if(value instanceof String)
+				type=Type.STRING;
+			else if(value instanceof Integer)
+				type=Type.INTEGER;
+			else if(value instanceof Float)
+				type=Type.FLOAT;
+		}
+		
 		return type;
 	}
 
@@ -204,8 +215,14 @@ public class Parameter implements XmlElementIF, Serializable {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "Parameter [key=" + key + ", value=" + value + ", type=" + type
+				+ ", childs=" + childs + "]";
+	}
+
 	public String getTagName(){
-		return this.getClass().getName();
+		return this.getClass().getSimpleName();
 	}
 	
 	

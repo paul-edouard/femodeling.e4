@@ -11,6 +11,8 @@ public abstract class Part extends LockableEntityProChanSupp{
 	 /** The serial version UID. */
     private static final long serialVersionUID = 1L;
     
+   
+    
 
 	static final String GroupStr="group";
 	static final String ModelStr="model";

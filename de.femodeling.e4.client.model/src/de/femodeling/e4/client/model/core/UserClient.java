@@ -9,7 +9,7 @@ public abstract class UserClient extends User {
 	/** The serial version UID. */
 	private static final long serialVersionUID = 1L;
 	
-	protected boolean online;
+	protected boolean online=false;
 
 	public boolean isOnline() {
 		return online;
@@ -46,7 +46,10 @@ public abstract class UserClient extends User {
 			par_type=new Parameter(TYPE,type);
 			this.getParameter().addChild(par_type);
 		}
+		par_type.setValue(type);
 		this.type = type;
 	}
+	
+	
 
 }
