@@ -32,8 +32,10 @@
             </children>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_iEwLgE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partsashcontainer.rigth" containerData="60">
-            <children xsi:type="basic:PartStack" xmi:id="_pBsvgE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.rightup"/>
-            <children xsi:type="basic:PartStack" xmi:id="_to49EE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.rightdown"/>
+            <children xsi:type="basic:PartStack" xmi:id="_pBsvgE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.rightup" containerData="80">
+              <children xsi:type="basic:Part" xmi:id="_IIVTAFp4EeK_2ePjdShW_Q" elementId="de.femodeling.e4.client.part.0" visible="false"/>
+            </children>
+            <children xsi:type="basic:PartStack" xmi:id="_to49EE0AEeKjzrbvcpdmGA" elementId="de.femodeling.e4.client.partstack.rightdown" containerData="20"/>
           </children>
         </children>
       </children>
@@ -63,12 +65,18 @@
   <handlers xmi:id="_N5MNQFpKEeKf08akwNLRAg" elementId="de.femodeling.e4.client.handler.0" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.handlers.user.AddGroupHandler" command="_OeN30FpIEeKf08akwNLRAg"/>
   <handlers xmi:id="_QvN_MFpKEeKf08akwNLRAg" elementId="de.femodeling.e4.client.handler.0" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.handlers.user.DeleteGroupHandler" command="_IIkScFpKEeKf08akwNLRAg"/>
   <handlers xmi:id="_XlsPUFpsEeKI4pIrmYyMAw" elementId="de.femodeling.e4.client.handler.user.removefromgroup" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.handlers.user.RemoveUserFromGroup" command="_SHF4oFpsEeKI4pIrmYyMAw"/>
-  <descriptors xmi:id="_EKvq0FpyEeKI4pIrmYyMAw" elementId="de.femodeling.e4.client.partdescriptor.projecteditor" label="Project Editor" iconURI="platform:/plugin/de.femodeling.e4.client/icons/folder_database.png" tooltip="Project Editor" allowMultiple="true" closeable="true" dirtyable="true" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.ui.parts.ProjectEditorPart"/>
+  <handlers xmi:id="_mzd6oFsoEeKLleiNfzjUzQ" elementId="de.femodeling.e4.client.handler.project.lock" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.handlers.lock.LockEntityHandler" command="_fH7yUFsoEeKLleiNfzjUzQ"/>
+  <descriptors xmi:id="_EKvq0FpyEeKI4pIrmYyMAw" elementId="de.femodeling.e4.client.partdescriptor.projecteditor" label="Project Editor" iconURI="platform:/plugin/de.femodeling.e4.client/icons/folder_database.png" tooltip="Project Editor" allowMultiple="true" closeable="true" dirtyable="true" contributionURI="bundleclass://de.femodeling.e4.client/de.femodeling.e4.client.ui.parts.ProjectEditorPart">
+    <toolbar xmi:id="_yXjB0FsoEeKLleiNfzjUzQ" elementId="de.femodeling.e4.client.toolbar.projecteditor">
+      <children xsi:type="menu:HandledToolItem" xmi:id="_1EV_QFsoEeKLleiNfzjUzQ" elementId="de.femodeling.e4.client.handledtoolitem.project.lock" label="Lock Project" iconURI="platform:/plugin/de.femodeling.e4.client/icons/lock.png" tooltip="lock the project to get the editor anaible" type="Check" command="_fH7yUFsoEeKLleiNfzjUzQ"/>
+    </toolbar>
+  </descriptors>
   <commands xmi:id="_Vh4M4E0YEeKZuOhQr5Q8YQ" elementId="org.eclipse.ui.file.exit" commandName="Exit" description="Exit the application"/>
   <commands xmi:id="_eonuwFRGEeKJi5Dew0Z-Fg" elementId="de.femodeling.e4.client.command.clearworkspace" commandName="Clear Workspace" description="Clear the content of the Workspace"/>
   <commands xmi:id="_XswA4FZLEeKcysUM9utr1Q" elementId="de.femodeling.e4.client.command.project.add" commandName="Add Project" description="Add a new project in the project view" category="_g4v2YFZLEeKcysUM9utr1Q"/>
   <commands xmi:id="_DY87EFZMEeKcysUM9utr1Q" elementId="de.femodeling.e4.client.command.project.addroot" commandName="Add Root Project" description="Add a new root project" category="_g4v2YFZLEeKcysUM9utr1Q"/>
   <commands xmi:id="_w3tNcFZLEeKcysUM9utr1Q" elementId="de.femodeling.e4.client.command.delete" commandName="Delete Project" description="Delete the selected project" category="_g4v2YFZLEeKcysUM9utr1Q"/>
+  <commands xmi:id="_fH7yUFsoEeKLleiNfzjUzQ" elementId="de.femodeling.e4.client.command.project.lock" commandName="Project lock" description="Lock a project" category="_g4v2YFZLEeKcysUM9utr1Q"/>
   <commands xmi:id="_vkpxYFpBEeKf08akwNLRAg" elementId="de.femodeling.e4.client.command.user.delete" commandName="Delete User" description="Delete the selected user"/>
   <commands xmi:id="_XhPJwFpDEeKf08akwNLRAg" elementId="de.femodeling.e4.client.command.user.add" commandName="Add User" description="Add a new user"/>
   <commands xmi:id="_OeN30FpIEeKf08akwNLRAg" elementId="de.femodeling.e4.client.command.user.groupadd" commandName="Add Group" description="Add a new user group"/>

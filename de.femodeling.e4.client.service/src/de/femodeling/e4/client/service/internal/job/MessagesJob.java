@@ -16,7 +16,7 @@ import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.workbench.UIEvents;
 
-import de.femodeling.e4.client.service.IMessageKey;
+import de.femodeling.e4.client.model.broker.IBrokerEvents;
 import de.femodeling.e4.model.dto.MessageDTO;
 import de.femodeling.e4.server.service.RemoteService;
 
@@ -63,13 +63,13 @@ public class MessagesJob extends Job {
 			lastMessageCalled=ent.getCreatingTime();
 			switch (ent.getSendingType()) {
 			case ADD:
-				broker.post(IMessageKey.ADD_DATA, ent);
+				broker.post(IBrokerEvents.ADD_DATA, ent);
 				break;
 			case UPDATE:
-				broker.post(IMessageKey.UPDATE_DATA, ent);
+				broker.post(IBrokerEvents.UPDATE_DATA, ent);
 				break;	
 			case REMOVE:
-				broker.post(IMessageKey.REMOVE_DATA, ent);
+				broker.post(IBrokerEvents.REMOVE_DATA, ent);
 				break;	
 			}
 		}

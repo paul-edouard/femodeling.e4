@@ -148,12 +148,12 @@ public class UserClientImpl extends UserClient {
 		UserClientImpl user = new UserClientImpl();
 
 		user.setForename(this.getForename());
-		user.setGroups(Utils.copySet(this.getGroups()));
+		user.setGroups(Utils.copyCollection(this.getGroups()));
 		user.setId(this.getId());
 		user.setLocation(this.getLocation());
 		user.setPassword(this.getPassword());
 		user.setPhonenumber(this.getPhonenumber());
-		user.setRoles(Utils.copySet(this.getRoles()));
+		user.setRoles(Utils.copyCollection(this.getRoles()));
 		user.setSurname(this.getSurname());
 		user.setParameter(this.getParameter().createCopy());
 		user.setOnline(this.isOnline());
@@ -165,12 +165,12 @@ public class UserClientImpl extends UserClient {
 
 	public void copyData(UserClientImpl ent) {
 		this.setForename(ent.getForename());
-		this.setGroups(Utils.copySet(ent.getGroups()));
+		this.setGroups(Utils.copyCollection(ent.getGroups()));
 		this.setId(ent.getId());
 		this.setLocation(ent.getLocation());
 		this.setPassword(ent.getPassword());
 		this.setPhonenumber(ent.getPhonenumber());
-		this.setRoles(Utils.copySet(ent.getRoles()));
+		this.setRoles(Utils.copyCollection(ent.getRoles()));
 		this.setSurname(ent.getSurname());
 		this.setParameter(ent.getParameter().createCopy());
 	}

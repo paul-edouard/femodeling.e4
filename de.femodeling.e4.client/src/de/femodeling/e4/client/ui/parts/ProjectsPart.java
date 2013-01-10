@@ -1,14 +1,20 @@
  
 package de.femodeling.e4.client.ui.parts;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
@@ -55,9 +61,17 @@ public class ProjectsPart {
 	@Inject
 	EPartService service;
 	
+	@Inject
+	private EModelService modelService;
+	
+	@Inject
+	private MApplication app;
+	
 	private TreeViewer treeViewer;
 	
 	private ProjectClientImpl root;
+	
+	public static final String PART_EDITOR_ID="de.femodeling.e4.client.partdescriptor.projecteditor";
 	
 	
 	@Inject
@@ -85,7 +99,7 @@ public class ProjectsPart {
 		
 		treeViewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
-				System.out.println("Double Click!");
+				//System.out.println("Double Click!");
 				
 				ISelection selection =treeViewer.getSelection();
 				if (selection != null & selection instanceof IStructuredSelection) {
@@ -155,15 +169,10 @@ public class ProjectsPart {
 						
 						
 					}
+					//Opent the project Editor
 					else if(item instanceof ProjectClientImpl){
 						
-						ProjectClientImpl selectedProject=(ProjectClientImpl) item;
-						
-						MPart part = service
-								.createPart("de.femodeling.e4.client.partdescriptor.projecteditor");
-						part.setLabel(selectedProject.getName());
-
-						service.showPart(part, PartState.ACTIVATE);
+						OpenProjectEditor((ProjectClientImpl) item);
 						
 					}
 					
@@ -201,6 +210,51 @@ public class ProjectsPart {
 		});
 		
 	}
+	
+	
+	private void OpenProjectEditor(ProjectClientImpl selectedProject){
+		
+		MPart part=searchPart(PART_EDITOR_ID,selectedProject.getLockableId());
+		if(part!=null){
+			service.bringToTop(part);
+			return;
+		}
+		
+		
+		part = service
+				.createPart(PART_EDITOR_ID);
+		part.setLabel(selectedProject.getName());
+		part.setVisible(true);
+		part.getTags().add(selectedProject.getLockableId());
+		
+		addProjectToPartContext(part,selectedProject);
+		
+		//Open the part
+		service.showPart(part, PartState.ACTIVATE);
+		
+	}
+	
+	private MPart searchPart(String partId,String tag){
+		
+		List<String> tags=new LinkedList<String>();
+		tags.add(tag);
+		
+		List<MPart> parts=modelService.findElements(app,
+				partId, MPart.class,tags );
+		if(parts.isEmpty())return null;
+		return parts.get(0);
+	}
+	
+	private void addProjectToPartContext(MPart part,ProjectClientImpl o){
+		
+		//Add the project to the part contact
+		IEclipseContext myContext=EclipseContextFactory.create();
+		myContext.set(ProjectClientImpl.class, o);
+		myContext.setParent(part.getContext());
+		part.setContext(myContext);
+		
+	}
+	
 	
 	
 	@PreDestroy

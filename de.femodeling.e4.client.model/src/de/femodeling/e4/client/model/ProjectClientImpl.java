@@ -7,6 +7,7 @@ import java.util.List;
 import de.femodeling.e4.client.model.core.ProjectClient;
 import de.femodeling.e4.client.model.listener.ProjectClientListenerIF;
 import de.femodeling.e4.model.core.Project;
+import de.femodeling.e4.util.Utils;
 //import org.apache.log4j.Logger;
 
 
@@ -133,6 +134,25 @@ public class ProjectClientImpl extends ProjectClient {
 		propertyChangeSupport.firePropertyChange("childs",this.getChilds().remove(childToDelete),false);
 		fireProjectsChanged(null);
 		
+	}
+	
+	
+	public ProjectClientImpl createCopy(){
+		ProjectClientImpl p=new ProjectClientImpl();
+		
+		p.setGroup(this.getGroup());
+		p.setLockableId(this.getLockableId());
+		p.setPath(this.getPath());
+		p.setSessionId(this.getSessionId());
+		p.setState(this.getState());
+		p.setType(this.getType());
+		p.setCadPaths(Utils.copyCollection(this.getCadPaths()));
+		p.setParent(this.getParent());
+		p.setChilds(this.getChilds());
+		p.setName(this.getName(),false);
+		p.setParameter(this.getParameter().createCopy());
+		
+		return p;
 	}
 	
 	/***********************************

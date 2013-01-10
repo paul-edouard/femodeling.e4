@@ -1,6 +1,7 @@
 package de.femodeling.e4.util;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Utils {
 
@@ -17,8 +18,16 @@ public class Utils {
 		System.out.println(System.getProperty("user.name"));
 	}
 	
-	public static HashSet<String> copySet(HashSet<String> input){
+	public static HashSet<String> copyCollection(HashSet<String> input){
 		HashSet<String> target=new HashSet<String>();
+		for(String s:input)
+			target.add(s);
+		
+		return target;
+	}
+	
+	public static LinkedList<String> copyCollection(LinkedList<String> input){
+		LinkedList<String> target=new LinkedList<String>();
 		for(String s:input)
 			target.add(s);
 		
