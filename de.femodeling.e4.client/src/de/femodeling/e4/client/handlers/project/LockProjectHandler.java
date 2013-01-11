@@ -68,7 +68,8 @@ public class LockProjectHandler {
 		if(!currentProject.islocked()){
 			service.getLockClientService().lockEntity(currentProject);
 			if(currentProject.islocked()){
-				refreshEditor(currentProject,true);
+				eventBroker.post(IBrokerEvents.PROJECT_UPDATE,currentProject.getLockableId() );
+				refreshEditor(currentProject,true,modelService,app);
 			}
 			else{
 				MessageDialog.openError(shell, "Lock project error", "the project \""+currentProject.getName()+"\" cannot be locked");
@@ -78,7 +79,8 @@ public class LockProjectHandler {
 		}
 		else{
 			if(service.getLockClientService().unlockEntity(currentProject)){
-				refreshEditor(currentProject,false);
+				eventBroker.post(IBrokerEvents.PROJECT_UPDATE,currentProject.getLockableId() );
+				refreshEditor(currentProject,true,modelService,app);
 			}
 			else{
 				MessageDialog.openError(shell, "Unlock project error", "the project \""+currentProject.getName()+"\" cannot be unlocked");
@@ -93,14 +95,16 @@ public class LockProjectHandler {
 	}
 	
 	
-	private void refreshEditor(ProjectClientImpl currentProject, boolean islocked){
-		eventBroker.post(IBrokerEvents.PROJECT_UPDATE,currentProject.getLockableId() );
+	public static void refreshEditor(ProjectClientImpl currentProject, boolean islocked,EModelService modelService, MApplication app){
+		
 		
 		List<String> tags=new LinkedList<String>();
 		tags.add(currentProject.getLockableId());
 		
 		List<MPart> parts=modelService.findElements(app,ProjectsPart.PART_EDITOR_ID, MPart.class,tags );
 		for(MPart part:parts){
+			
+			part.setLabel(currentProject.getName());
 			
 			MHandledToolItem item=findToolItem(part,"de.femodeling.e4.client.handledtoolitem.project.lock");
 			
@@ -126,7 +130,9 @@ public class LockProjectHandler {
 		}
 	}
 	
-	private MHandledToolItem findToolItem(MPart part,String elementId){
+	
+	
+	private static  MHandledToolItem findToolItem(MPart part,String elementId){
 		List<MToolBarElement> elements=part.getToolbar().getChildren();
 		for(MToolBarElement el:elements){
 			if(el.getElementId().equals(elementId) && el instanceof MHandledToolItem){
@@ -158,7 +164,7 @@ public class LockProjectHandler {
 		if(currentProject!=null && lockableId!=null){
 		
 		if(!lockableId.equals(currentProject.getLockableId()))return;
-		refreshEditor(currentProject,currentProject.islocked());
+		refreshEditor(currentProject,currentProject.islocked(),modelService,app);
 		}
 		
 	

@@ -9,16 +9,14 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeanProperties;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.swt.SWT;
@@ -38,6 +36,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.ResourceManager;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import de.femodeling.e4.client.handlers.project.LockProjectHandler;
 import de.femodeling.e4.client.model.ClientSession;
 import de.femodeling.e4.client.model.ProjectClientImpl;
 import de.femodeling.e4.client.model.UserClientImpl;
@@ -48,8 +47,6 @@ import de.femodeling.e4.client.service.IUserProvider;
 import de.femodeling.e4.model.core.Project;
 
 public class ProjectEditorPart{
-	private DataBindingContext m_bindingContext;
-	
 	
 	/** This class' Logger instance. */
 	private static Logger logger = Logger
@@ -86,6 +83,12 @@ public class ProjectEditorPart{
 	
 	@Inject
 	private IClientService clientService;
+	
+	@Inject
+	private EModelService modelService;
+	
+	@Inject
+	private MApplication app;
 	
 	
 	
@@ -209,7 +212,6 @@ public class ProjectEditorPart{
 		
 		
 		setEditable();
-		m_bindingContext = initDataBindings();
 		
 		fillAndSetCombo();
 		addDirtyableListener();
@@ -226,8 +228,15 @@ public class ProjectEditorPart{
 		if(!lockableId.equals(this.currentPro.getLockableId()))return;
 		
 		setEditable();
+		fillAndSetCombo();
+		
+		LockProjectHandler.refreshEditor(this.currentPro,this.currentPro.islocked(),modelService,app);
+		
+		dirty.setDirty(false);
 	
 	}
+	
+	
 	
 	
 	
@@ -246,13 +255,16 @@ public class ProjectEditorPart{
 	}
 	
 	private void addDirtyableListener(){
-		textName.addModifyListener(projectDirtyListener);
+		//textName.addModifyListener(projectDirtyListener);
 		comboType.addModifyListener(projectDirtyListener);
 		comboGroup.addModifyListener(projectDirtyListener);
 		comboState.addModifyListener(projectDirtyListener);
 	}
 	
 	private void fillAndSetCombo(){
+		
+		textName.setText(this.currentPro.getName());
+		
 		//Type
 		comboType.setItems(Project.TYPE_LIST);
 		comboType.setText(this.currentPro.typeToString());
@@ -301,21 +313,7 @@ public class ProjectEditorPart{
 		copyPro.setGroup(comboGroup.getText());
 		copyPro.stringToState(comboState.getText());
 		copyPro.stringToType(comboType.getText());
-		copyPro.setName(textName.getText());
-		
-		/*
-		System.out.println("New Name:"+copyPro.getName());
-		System.out.println("Old Name:"+currentPro.getName());
-		
-		
-		if(!copyPro.getName().equals(currentPro.getName())){
-			if(!projectProvider.rename(currentPro,copyPro.getName() )){
-				MessageDialog.openError(shell, "Save project Error", "Cannot rename the project");
-				return;
-			}
-			
-		}
-		*/
+		//copyPro.setName(textName.getText());
 		
 		
 		if(projectProvider.updateData(copyPro)!=null){
@@ -327,13 +325,5 @@ public class ProjectEditorPart{
 			MessageDialog.openError(shell, "Save project Error", "Cannot save the project");
 		}
 	}
-	protected DataBindingContext initDataBindings() {
-		DataBindingContext bindingContext = new DataBindingContext();
-		//
-		IObservableValue observeTextTextNameObserveWidget = WidgetProperties.text(SWT.Modify).observe(textName);
-		IObservableValue nameCurrentProObserveValue = BeanProperties.value("name").observe(copyPro);
-		bindingContext.bindValue(observeTextTextNameObserveWidget, nameCurrentProObserveValue, null, null);
-		//
-		return bindingContext;
-	}
+	
 }
