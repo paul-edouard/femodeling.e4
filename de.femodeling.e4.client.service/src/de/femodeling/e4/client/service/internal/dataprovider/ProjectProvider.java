@@ -143,6 +143,11 @@ public class ProjectProvider implements IWritableDataProvider, IProjectProvider 
 	}
 	
 	
+	public boolean rename(ProjectClientImpl pro, String newProName ){
+		return service.getProjectClientService().renameProject(pro, newProName);
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see de.femodeling.e4.client.service.dataprovider.IProjectProvider#getNumberOfParts(de.femodeling.e4.client.model.ProjectClientImpl, de.femodeling.e4.model.core.part.Part.Type)
 	 */

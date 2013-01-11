@@ -237,7 +237,7 @@ public class ProjectEditorPart{
 		
 		//logger.info("Set editable");
 		
-		textName.setEditable(editable);
+		textName.setEditable(false);
 		comboType.setEnabled(false);
 		comboGroup.setEnabled(editable);
 		comboState.setEnabled(editable);
@@ -301,6 +301,22 @@ public class ProjectEditorPart{
 		copyPro.setGroup(comboGroup.getText());
 		copyPro.stringToState(comboState.getText());
 		copyPro.stringToType(comboType.getText());
+		copyPro.setName(textName.getText());
+		
+		/*
+		System.out.println("New Name:"+copyPro.getName());
+		System.out.println("Old Name:"+currentPro.getName());
+		
+		
+		if(!copyPro.getName().equals(currentPro.getName())){
+			if(!projectProvider.rename(currentPro,copyPro.getName() )){
+				MessageDialog.openError(shell, "Save project Error", "Cannot rename the project");
+				return;
+			}
+			
+		}
+		*/
+		
 		
 		if(projectProvider.updateData(copyPro)!=null){
 			dirty.setDirty(false);

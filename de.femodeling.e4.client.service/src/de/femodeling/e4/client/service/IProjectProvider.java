@@ -20,6 +20,8 @@ public interface IProjectProvider {
 	public abstract boolean removeData(ProjectClientImpl p);
 
 	public abstract int getNumberOfParts(ProjectClientImpl p, Part.Type type);
+	
+	public abstract boolean rename(ProjectClientImpl p, String newProName );
 
 	public abstract boolean hasAssembly(ProjectClientImpl p, Assembly.Type type);
 
