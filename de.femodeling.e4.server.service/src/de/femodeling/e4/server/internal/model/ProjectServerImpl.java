@@ -28,6 +28,7 @@ public class ProjectServerImpl extends Project{
 	public String getFileName(){return getPath()+ File.separator +projectFile;}
 	
 	public boolean renameProject(String newName){
+		System.out.println("---->Rename Project: "+newName);
 		File oldDir=new File( getPath());
 		File newDir=new File(oldDir.getParent()+File.separator+newName);
 		if(oldDir.renameTo(newDir)){
