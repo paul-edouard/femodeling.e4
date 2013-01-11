@@ -104,8 +104,11 @@ public class UserDAOImpl extends XmlFile implements UserDAOIF {
 
 	private HashSet<String> getUserGroups(String userId) {
 		HashSet<String> set = new HashSet<String>();
-		if (Utils.isWIndow())
+		if (Utils.isWIndow()){
 			set.add("Window");
+			set.add("Group1");
+			set.add("Group2");
+		}
 		else {
 			String output = new Execute().getOutput("groups " + userId);
 			String[] groups = output.split(" ");

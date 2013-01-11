@@ -8,6 +8,7 @@ import de.femodeling.e4.bundleresourceloader.IBundleResourceLoader;
 import de.femodeling.e4.client.model.ProjectClientImpl;
 import de.femodeling.e4.client.ui.IImageKeys;
 import de.femodeling.e4.client.ui.contentprovider.ProjectsTreeContentProvider.ProjectTreeContent;
+import de.femodeling.e4.model.core.Project;
 
 public class ProjectsTreeLabelProvider implements ILabelProvider {
 	
@@ -17,7 +18,12 @@ public class ProjectsTreeLabelProvider implements ILabelProvider {
 	
 	private Image projectImage;
 	private Image projectLockedImage;
-
+	
+	
+	private Image projectGroup;
+	private Image projectCarLine;
+	private Image projectDataLevel;
+	
 	private Image assemblyImage;
 	private Image feModuleImage;
 	private Image connectionImage;
@@ -34,6 +40,10 @@ public class ProjectsTreeLabelProvider implements ILabelProvider {
 		feModuleImage=loader.loadImage(getClass(), IImageKeys.GROUP);
 		connectionImage=loader.loadImage(getClass(), IImageKeys.CONNECTION);
 		translationImage=loader.loadImage(getClass(), IImageKeys.CONNECTION);
+		
+		projectGroup=loader.loadImage(getClass(), IImageKeys.PROJECT_GROUP);
+		projectCarLine=loader.loadImage(getClass(), IImageKeys.PROJECT_CAR);
+		projectDataLevel=loader.loadImage(getClass(), IImageKeys.PROJECT_DATA_LEVEL);
 		
 		
 	}
@@ -67,8 +77,17 @@ public class ProjectsTreeLabelProvider implements ILabelProvider {
 		if(element instanceof ProjectClientImpl){
 			ProjectClientImpl proj=(ProjectClientImpl) element;
 		
-					if(!proj.islocked()) return projectImage;
-					else 				return projectLockedImage;
+					if(proj.islocked()) return projectLockedImage;
+					else {
+						if(proj.getType()==Project.Type.GROUP){
+							return projectGroup;
+						}
+						else if(proj.getType()==Project.Type.CARLINE){
+							return projectCarLine;
+						}
+						
+						return projectDataLevel;
+					}
 		
 			
 		}

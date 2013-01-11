@@ -247,8 +247,9 @@ public class UsersPart {
 		
 		Set<String> onlineUserIds = provider.getOnlineUserIds();
 		for (UserClientImpl user : users) {
-			if (onlineUserIds.contains(user.getId()))
+			if (onlineUserIds.contains(user.getId())){
 				user.setOnline(true);
+			}
 		}
 		
 		rootGroup.addGroup(allUsers);

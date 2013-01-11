@@ -9,8 +9,11 @@ import de.femodeling.e4.model.core.lockable.LockableEntityProChanSupp;
 
 public abstract class Project extends  LockableEntityProChanSupp{
 	
-	public enum State { STARTED , ACTIVATED, FINISHED, DELETED }
+	public enum State { STARTED , ACTIVATED, FINISHED, DELETED,NONE }
 	public enum Type { ROOT, GROUP, CARLINE, DATA_LEVEL,NONE }
+	
+	public static final String[] STATE_LIST={"STARTED","ACTIVATED","FINISHED","DELETED","NONE"}; 
+	public static final String[] TYPE_LIST={"ROOT","GROUP","CARLINE","DATA_LEVEL","NONE"};
 	
 	 /** The serial version UID. */
     private static final long serialVersionUID = 1L;
@@ -102,14 +105,14 @@ public abstract class Project extends  LockableEntityProChanSupp{
 	}
 
 	public String typeToString(){
-		if(type==null)return  "unknow state";
+		if(type==null)return  TYPE_LIST[4];
 		
 		switch(type){
-			case ROOT:return "root";
-			case GROUP:return "group";
-			case CARLINE:return "carline";
-			case DATA_LEVEL:return "data level";
-			default: return "unknow type";
+			case ROOT:return TYPE_LIST[0];
+			case GROUP:return TYPE_LIST[1];
+			case CARLINE:return TYPE_LIST[2];
+			case DATA_LEVEL:return TYPE_LIST[3];
+			default: return TYPE_LIST[4];
 		}
 	}
 	
@@ -117,13 +120,13 @@ public abstract class Project extends  LockableEntityProChanSupp{
 	public void stringToType(String str){
 		if(str==null || str.isEmpty())return;
 		
-		if(str.equals("root"))
+		if(str.equals(TYPE_LIST[0]))
 			type=Type.ROOT;
-		else if(str.equals("group"))
+		else if(str.equals(TYPE_LIST[1]))
 			type=Type.GROUP;
-		else if(str.equals("carline"))
+		else if(str.equals(TYPE_LIST[2]))
 			type=Type.CARLINE;
-		else if(str.equals("data level"))
+		else if(str.equals(TYPE_LIST[3]))
 			type=Type.DATA_LEVEL;
 		else
 			type=Type.NONE;
@@ -133,29 +136,35 @@ public abstract class Project extends  LockableEntityProChanSupp{
     //public enum State { STARTED , ACTIVATED, FINISHED, DELETED }
     
 	public String stateToString(){
-		if(state==null)return  "unknow state";
+		if(state==null)return STATE_LIST[4];
 		
 		switch(state){
-			case STARTED:return "started";
-			case ACTIVATED:return "activated";
-			case FINISHED:return "finished";
-			case DELETED:return "deleted";
-			default: return "unknow state";
+			case STARTED:return STATE_LIST[0];
+			case ACTIVATED:return STATE_LIST[1];
+			case FINISHED:return STATE_LIST[2];
+			case DELETED:return STATE_LIST[3];
+			default: return STATE_LIST[4];
 		}
 	}
 	
 	
 	public void stringToState(String str){
-		if(str==null || str.isEmpty())return;
+		if(str==null || str.isEmpty()){
+			state=State.NONE;
+			return;
+		}
 		
-		if(str.equals("started"))
+		if(str.equals(STATE_LIST[0]))
 			state=State.STARTED;
-		else if(str.equals("activated"))
+		else if(str.equals(STATE_LIST[1]))
 			state=State.ACTIVATED;
-		else if(str.equals("finished"))
+		else if(str.equals(STATE_LIST[2]))
 			state=State.FINISHED;
-		else if(str.equals("deleted"))
+		else if(str.equals(STATE_LIST[3]))
 			state=State.DELETED;
+		else if(str.equals(STATE_LIST[4])){
+			state=State.NONE;
+		}
 	}
 
 	@Override

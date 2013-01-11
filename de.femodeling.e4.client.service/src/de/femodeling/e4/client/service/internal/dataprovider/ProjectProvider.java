@@ -2,6 +2,7 @@ package de.femodeling.e4.client.service.internal.dataprovider;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.apache.log4j.Logger;
 
@@ -77,6 +78,9 @@ public class ProjectProvider implements IWritableDataProvider, IProjectProvider 
 		
 		ProjectClientImpl p=(ProjectClientImpl) dataProvider.getData(new UUIDKey(ProjectProvider.DATA_ROOT));
 		rootProject=p;
+		
+		//logger.info("User Groups:"+remoteService.getUserService().getCurrentUser().getId());
+		
 		fillProjectCache(dataProvider,p);
 		
 		}
@@ -87,10 +91,9 @@ public class ProjectProvider implements IWritableDataProvider, IProjectProvider 
 	private static void fillProjectCache(DataProviderCacheAdapter dataProvider,ProjectClientImpl p){
 		
 		for(ProjectClientImpl c:p.getChilds()){
-			UUIDKey key=new UUIDKey(c.getLockableId());
-			dataProvider.flushCacheForUpdate(key, c);
-			fillProjectCache(dataProvider,c);
-			
+				UUIDKey key=new UUIDKey(c.getLockableId());
+				dataProvider.flushCacheForUpdate(key, c);
+				fillProjectCache(dataProvider,c);
 		}
 		
 	}
@@ -185,8 +188,17 @@ public class ProjectProvider implements IWritableDataProvider, IProjectProvider 
 	public Object getData(IKey key) {
 		assert key instanceof UUIDKey;
 		UUIDKey uuidKey = (UUIDKey) key;
+		
+		//get the root project from the server
 		logger.debug("Get the Data from the Server: "+uuidKey.getUUIDKey());
 		ProjectDTO p=remoteService.getProjectService().getRootProject();
+		
+		
+		//Reduce the projects in function of the User group
+		if(remoteService.getUserService().getCurrentUser()!=null){
+			HashSet<String> userGroups=remoteService.getUserService().getCurrentUser().getGroups();
+			reduceChildFromProject(p,userGroups);
+		}
 		
 		HashMap<String, String> lockedEntMap=service.getLockClientService().getAllLockedEntities();
 		
@@ -200,6 +212,28 @@ public class ProjectProvider implements IWritableDataProvider, IProjectProvider 
 			
 			return seachProjectWithId(p_c,uuidKey.getUUIDKey());
 		}
+		
+	}
+	
+	private void  reduceChildFromProject(ProjectDTO p,HashSet<String> userGroups){
+		
+		//Get the project to delete
+		HashSet<ProjectDTO> toDelete=new HashSet<ProjectDTO>();
+		
+		for(ProjectDTO c:p.getChilds()){
+			if(!userGroups.contains(c.getGroup())){
+				toDelete.add(c);
+			}
+		}
+		
+		
+		p.getChilds().removeAll(toDelete);
+		
+		for(ProjectDTO c:p.getChilds()){
+			reduceChildFromProject(c,userGroups);
+		}
+		
+		
 		
 	}
 	

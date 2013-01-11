@@ -4,11 +4,13 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import de.femodeling.e4.model.core.Project;
 import de.femodeling.e4.model.core.Project.State;
 import de.femodeling.e4.model.core.Project.Type;
 import de.femodeling.e4.model.core.parameter.Parameter;
@@ -24,17 +26,35 @@ public class ProjectDAOImpl extends XmlFile implements ProjectDAOIF {
 	
 	private ProjectServerImpl project;
 	
-	//private static Logger logger = Logger.getLogger(ProjectDAOImpl.class);
+	private static Logger logger = Logger.getLogger(ProjectDAOImpl.class);
 	
 	public ProjectDAOImpl(){
 		project=new ProjectServerImpl();
+	}
+	
+	
+	private String getFirstValidRootDir(){
+		for(String dir:rootDirList){
+			if(new File(dir).isDirectory())
+				return dir;
+		}
+		
+		return "";
 	}
 	
 	/**
 	 * save the project
 	 */
 	public boolean save(ProjectServerImpl p){
+		
+		if(p.getType()==Project.Type.GROUP && !new File(p.getPath()).exists()){
+			p.setPath(getFirstValidRootDir()+File.separator+p.getName());
+		}
+		
+		logger.info("Try to save the project: "+p);
 		project=p;
+		
+		
 		if(project.createProjectStructure()){
 			return saveAsXml(project.getFileName());
 		}
@@ -89,6 +109,7 @@ public class ProjectDAOImpl extends XmlFile implements ProjectDAOIF {
 		
 		if(p.getType()==Type.ROOT){
 			for (String path : rootDirList) {
+				logger.info("Extract Project From Dir: "+path);
 				List<ProjectServerImpl> l=extractAllProjectsFromDir(path);
 				p_list.addAll(l);
 			}

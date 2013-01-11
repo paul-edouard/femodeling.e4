@@ -1,7 +1,6 @@
 package de.femodeling.e4.client.model.core;
 
 import de.femodeling.e4.model.core.User;
-import de.femodeling.e4.model.core.parameter.Parameter;
 
 
 public abstract class UserClient extends User {
@@ -19,6 +18,14 @@ public abstract class UserClient extends User {
 		this.online = online;
 	}
 	
+	public String getDefaultGroup(){
+		for(String g:this.getGroups()){
+			if(g!=null)return g;
+		}
+		
+		return "";
+	}
+	
 	/**
 	 * type of the user
 	 * three types are available "all","user","group"
@@ -33,20 +40,13 @@ public abstract class UserClient extends User {
 
 	
 	public String getType() {
-		Parameter par_type=this.getParameter().getChild(TYPE);
-		if(par_type!=null && par_type.getType()==Parameter.Type.STRING){
-			type=(String)par_type.getValue();
-		}
+		String value=this.getStringParam(TYPE);
+		if(!value.isEmpty())type=value;
 		return type;
 	}
 
 	public void setType(String type) {
-		Parameter par_type=this.getParameter().getChild(TYPE);
-		if(par_type==null){
-			par_type=new Parameter(TYPE,type);
-			this.getParameter().addChild(par_type);
-		}
-		par_type.setValue(type);
+		setParam(TYPE, type);
 		this.type = type;
 	}
 	

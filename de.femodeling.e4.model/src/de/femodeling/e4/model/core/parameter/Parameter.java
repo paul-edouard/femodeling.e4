@@ -67,6 +67,14 @@ public class Parameter implements XmlElementIF, Serializable {
 		childs=new LinkedList<Parameter>();
 	}
 	
+	public Parameter(String key, Object value) {
+		super();
+		this.key = key;
+		this.value = value;
+		this.type = Type.NONE;this.getType();
+		this.childs=new LinkedList<Parameter>();
+	}
+	
 	public Parameter(String key, String value) {
 		super();
 		this.key = key;

@@ -16,7 +16,8 @@
     -->
     
    <util:map id="configFilesMap">  
-      <entry key="ProjectDir" value="D:\Paul\04_Programierung\Test\Project" />
+      <entry key="ProjectDir_1" value="D:\Paul\04_Programierung\Test\Project" />
+      <entry key="ProjectDir_2" value="D:\Paul\04_Programierung\Test\Project\Empty" />
       <entry key="UserFileList" value="D:\Paul\04_Programierung\Test\Project\UserList.xml" />
       <entry key="LockedEntitiesList" value="D:\Paul\04_Programierung\Test\Project\LockedEntitiesList.xml" />   
    </util:map>   

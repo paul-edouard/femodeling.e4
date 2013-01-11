@@ -11,9 +11,13 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
@@ -33,6 +37,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.femodeling.e4.bundleresourceloader.IBundleResourceLoader;
 import de.femodeling.e4.client.model.ProjectClientImpl;
+import de.femodeling.e4.client.model.broker.IBrokerEvents;
 import de.femodeling.e4.client.model.listener.ProjectClientListenerIF;
 import de.femodeling.e4.client.service.IProjectProvider;
 import de.femodeling.e4.client.ui.contentprovider.ProjectsTreeContentProvider;
@@ -66,6 +71,7 @@ public class ProjectsPart {
 	
 	@Inject
 	private MApplication app;
+	
 	
 	private TreeViewer treeViewer;
 	
@@ -172,6 +178,8 @@ public class ProjectsPart {
 					//Opent the project Editor
 					else if(item instanceof ProjectClientImpl){
 						
+						//de.femodeling.e4.client.command.project.openeditor
+						
 						OpenProjectEditor((ProjectClientImpl) item);
 						
 					}
@@ -215,46 +223,70 @@ public class ProjectsPart {
 	private void OpenProjectEditor(ProjectClientImpl selectedProject){
 		
 		MPart part=searchPart(PART_EDITOR_ID,selectedProject.getLockableId());
-		if(part!=null){
-			service.bringToTop(part);
-			return;
+		if(part!=null ){
+			if(part.getContext()==null){
+				part.setContext(EclipseContextFactory.create());
+				part.getContext().set(ProjectClientImpl.class, selectedProject);
+				part.getContext().set(MDirtyable.class, new MyMDirtyable(part));
+			}
+			
+				service.bringToTop(part);
+				return;
+			
 		}
 		
 		
-		part = service
-				.createPart(PART_EDITOR_ID);
-		part.setLabel(selectedProject.getName());
-		part.setVisible(true);
-		part.getTags().add(selectedProject.getLockableId());
+		//Create the part
+		part = createProjectEditorPart(selectedProject);
 		
-		addProjectToPartContext(part,selectedProject);
+		
+		//add the part to the corresponding Stack
+		MPartStack myStack=(MPartStack)modelService.find("de.femodeling.e4.client.partstack.rightup", app);
+		myStack.getChildren().add(part);
 		
 		//Open the part
 		service.showPart(part, PartState.ACTIVATE);
-		
+				
 	}
+	
+	private MPart createProjectEditorPart(ProjectClientImpl selectedProject){
+		MPart part = service.createPart(PART_EDITOR_ID);
+		
+		part.setLabel(selectedProject.getName());
+		part.setVisible(true);
+		part.setDirty(false);
+		part.getTags().add(selectedProject.getLockableId());
+		part.setContext(EclipseContextFactory.create());
+		part.getContext().set(ProjectClientImpl.class, selectedProject);
+		part.getContext().set(MDirtyable.class, new MyMDirtyable(part));
+		
+		return part;
+	}
+	
+	
+	
 	
 	private MPart searchPart(String partId,String tag){
 		
+		List<MPart> parts=getPartList(partId, tag);
+		if(parts.isEmpty())return null;
+		return parts.get(0);
+	}
+	
+	private List<MPart> getPartList(String partId,String tag){
 		List<String> tags=new LinkedList<String>();
 		tags.add(tag);
 		
 		List<MPart> parts=modelService.findElements(app,
 				partId, MPart.class,tags );
-		if(parts.isEmpty())return null;
-		return parts.get(0);
+		return parts;
 	}
 	
-	private void addProjectToPartContext(MPart part,ProjectClientImpl o){
-		
-		//Add the project to the part contact
-		IEclipseContext myContext=EclipseContextFactory.create();
-		myContext.set(ProjectClientImpl.class, o);
-		myContext.setParent(part.getContext());
-		part.setContext(myContext);
-		
+	@Inject
+	private void updatePro(@Optional  @UIEventTopic(IBrokerEvents.PROJECT_UPDATE)String lockableId){
+		if(treeViewer!=null)
+			treeViewer.refresh();
 	}
-	
 	
 	
 	@PreDestroy

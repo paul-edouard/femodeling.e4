@@ -33,7 +33,10 @@ public interface IImageKeys {
 	public static final String PROJECT = "icons/folder_database.png";
 	public static final String PROJECT_ADD = "icons/folder_add.png";
 	public static final String PROJECT_DELETE = "icons/folder_delete.png";
-	public static final String PROJECT_LOCK = "icons/folder_key.png";
+	public static final String PROJECT_LOCK = "icons/lock.png";
+	public static final String PROJECT_GROUP = "icons/box.png";
+	public static final String PROJECT_CAR = "icons/car.png";
+	public static final String PROJECT_DATA_LEVEL = "icons/folder_database.png";
 	
 	//PART
 	public static final String PART = "icons/brick.png";

@@ -73,7 +73,7 @@ public class ProjectRemoteService implements ProjectRemoteServiceIF{
 		for(String key:configFiles.keySet()){
 			
 			//read the project file list
-			if(key.equals(PROJECT_DIR)){
+			if(key.contains(PROJECT_DIR)){
 				
 				if(configFiles.get(key)!=null && new File(configFiles.get(key)).exists()){
 					//Add the Root dir	
