@@ -90,14 +90,43 @@ public class UserRemoteService implements UserRemoteServiceIF {
 
 	@Override
 	public UserDTO saveUser(UserDTO u) {
+		
+		boolean isUpdate=userExist(u.getId());
+		
 		UserDAOIF userDAO = RegisterServerDAOService.INSTANCE.getUserDAO();
-		return UserTransformService.transform(userDAO
-				.saveUser(UserTransformService.transform(u)));
+		UserServerImpl u_server=userDAO
+				.saveUser(UserTransformService.transform(u));
+		UserDTO u_dto=UserTransformService.transform(u_server);
+		
+		if(u_server!=null){
+			if(isUpdate)
+				RegisterServerDAOService.INSTANCE.getMessageDAO().addUpdateMessage(u_server);
+			else
+				RegisterServerDAOService.INSTANCE.getMessageDAO().addAddMessage(u_server);
+		}
+		
+		return u_dto;
+	}
+	
+	private boolean userExist(String userId){
+		for(UserDTO u:getAllUsers()){
+			if(u.getId().equals(userId))return true;
+		}
+		return false;
 	}
 
 	public boolean deleteUser(UserDTO u) {
-		return RegisterServerDAOService.INSTANCE.getUserDAO().deleteUser(
-				UserTransformService.transform(u));
+		
+		UserServerImpl u_server=UserTransformService.transform(u);
+		
+		if(RegisterServerDAOService.INSTANCE.getUserDAO().deleteUser(
+				UserTransformService.transform(u))){
+			
+			RegisterServerDAOService.INSTANCE.getMessageDAO().addRemoveMessage(u_server);
+			return true;
+		}
+		
+		return false;
 	}
 
 	public void setConfigFiles(final Map<String, String> configFiles) {

@@ -38,11 +38,11 @@ public class MessageRemoteService implements MessageRemoteServiceIF {
 	
 	
 	@Override
-	public LinkedList<MessageDTO> getLastMesssages( final Date lastMessageCall) {
+	public LinkedList<MessageDTO> getLastMesssages( final Date lastMessageCall,final String lastMessageId) {
 		//logger.info("Get the last Messages");
 		String s_id=ServerContextProvider.getServerContext().getSessionId();
 		
-		LinkedList<Message> m_list=RegisterServerDAOService.INSTANCE.getMessageDAO().getLastMesssages(s_id, lastMessageCall);
+		LinkedList<Message> m_list=RegisterServerDAOService.INSTANCE.getMessageDAO().getLastMesssages(s_id, lastMessageCall,lastMessageId);
 		LinkedList<MessageDTO> m_dto_list=new LinkedList<MessageDTO>();
 		for (Message message : m_list) {
 			m_dto_list.add(MessageTransformService.transform(message));

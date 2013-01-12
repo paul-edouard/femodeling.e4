@@ -90,14 +90,25 @@ public class MessageDAOImpl implements MessageDAOIF {
 	
 	
 	@Override
-	public synchronized LinkedList<Message> getLastMesssages(final String SessionId, final Date lastMessageCall) {
+	public synchronized LinkedList<Message> getLastMesssages(final String SessionId, final Date lastMessageCall,final String lastMessageId) {
 		LinkedList<Message> returnMesList=new LinkedList<Message>();
+		boolean lastMessageReached=lastMessageId.isEmpty();
 		for(Message ent:lastMessages){
-			if(!SessionId.equals(ent.getSendingSessionId()) &&  
-					ent.getCreatingTime().compareTo(lastMessageCall)>=0 )
+			
+			if(lastMessageReached){
+				if(!SessionId.equals(ent.getSendingSessionId()) &&  
+						ent.getCreatingTime().compareTo(lastMessageCall)>=0 )
 				returnMesList.add(ent);
+			}
+			else{
+				lastMessageReached=ent.getLockableId().equals(lastMessageId);
+			}
 		}
 		
+		//Add the all list if the last message couldn't be found
+		if(!lastMessageReached){
+			returnMesList.addAll(lastMessages);
+		}
 		
 		return returnMesList;
 	}

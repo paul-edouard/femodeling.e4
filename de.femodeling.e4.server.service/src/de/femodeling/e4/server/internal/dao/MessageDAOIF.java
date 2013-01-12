@@ -14,7 +14,7 @@ public interface MessageDAOIF {
 	 * @param lastMessageCall
 	 * @return
 	 */
-	public LinkedList<Message> getLastMesssages( final String SessionId, final Date lastMessageCall);
+	public LinkedList<Message> getLastMesssages( final String SessionId, final Date lastMessageCall,final String lastMessageId);
 	
 	
 	/**

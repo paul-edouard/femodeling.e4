@@ -21,6 +21,8 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 
 import de.femodeling.e4.ui.dataprovider.IDataProvider;
 import de.femodeling.e4.ui.dataprovider.cache.ICachingProperty;
@@ -73,7 +75,9 @@ public class Registry implements IRegistery {
 
 	/** Flag whether caching is disabled globally. **/
 	private boolean ignoreCacheDefinition = false;
-
+	
+	/**Eclipse context set during the service initialization **/
+	private IEclipseContext eclipseContext;
 	
 	/**
 	 * @param ignoreCacheDefinition
@@ -143,8 +147,11 @@ public class Registry implements IRegistery {
 			try {
 				String dataProviderId = providerElement
 						.getAttribute(REGISTRY_ID_ATTRIBUTE_ID);
-				IDataProvider dataProvider = (IDataProvider) providerElement
+				Object op = (Object) providerElement
 						.createExecutableExtension(REGISTRY_ID_ATTRIBUTE_CLASS);
+				IDataProvider dataProvider = (IDataProvider)ContextInjectionFactory.make(
+						op.getClass(), eclipseContext);
+				
 				logger
 						.info("--- register provider type [" + dataProvider.getType() //$NON-NLS-1$
 								+ "] with id [" + dataProviderId + "]"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -153,9 +160,15 @@ public class Registry implements IRegistery {
 				// Evaluate whether caching is enabled
 				if (!isCacheDefinitionIgnored()
 						&& cachingStragtegyElements.length == 1) {
-					// If so, instantiate the caching strategy...
+					// If so, instantiate the caching strategy within the eclipse context
+					Object o = (Object) cachingStragtegyElements[0]
+							.createExecutableExtension(REGISTRY_ID_ATTRIBUTE_CLASS);
+					ICachingStrategy cachingStrategy = (ICachingStrategy)ContextInjectionFactory.make(
+							o.getClass(), eclipseContext);
+					/*
 					ICachingStrategy cachingStrategy = (ICachingStrategy) cachingStragtegyElements[0]
 							.createExecutableExtension(REGISTRY_ID_ATTRIBUTE_CLASS);
+					*/
 					logger.info("--- - caching strategy found [" //$NON-NLS-1$
 							+ cachingStrategy.getClass().getName() + "]"); //$NON-NLS-1$
 					// ... set the host IDataProvider if requested ...
@@ -216,7 +229,10 @@ public class Registry implements IRegistery {
 	 * All <code>IDataProvider</code>s found are listed in the <code>Map</code>
 	 * to allow a lookup later on.
 	 */
-	public void initialize() {
+	public void initialize(IEclipseContext parent) {
+		
+		eclipseContext=parent;
+		
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IExtensionPoint extensionPoint = registry
 				.getExtensionPoint(REGISTRY_ID_EXTENSION_POINT_ID);

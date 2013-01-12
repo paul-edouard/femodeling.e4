@@ -1,5 +1,7 @@
 package de.femodeling.e4.ui.dataprovider.registery;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
+
 import de.femodeling.e4.ui.dataprovider.IDataProvider;
 
 public interface IRegistery {
@@ -21,7 +23,7 @@ public interface IRegistery {
 	 * All <code>IDataProvider</code>s found are listed in the <code>Map</code>
 	 * to allow a lookup later on.
 	 */
-	public void initialize(); 
+	public void initialize(IEclipseContext parent); 
 	
 	
 	/**

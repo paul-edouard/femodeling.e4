@@ -1,5 +1,6 @@
 package de.femodeling.e4.client.service.internal.job;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
@@ -29,6 +30,8 @@ public class MessagesJob extends Job {
 	
 	private Date lastMessageCalled;
 	
+	private String lastMessageId="";
+	
 	@Inject
 	private RemoteService remoteService;
 	
@@ -56,11 +59,12 @@ public class MessagesJob extends Job {
 			lastMessageCalled=now.getTime();
 		}
 		
-		LinkedList<MessageDTO> mesList=remoteService.getMessageService().getLastMesssages( lastMessageCalled);
+		LinkedList<MessageDTO> mesList=remoteService.getMessageService().getLastMesssages( lastMessageCalled,lastMessageId);
 		
 		
 		for(MessageDTO ent:mesList){
 			lastMessageCalled=ent.getCreatingTime();
+			lastMessageId=ent.getLockableId();
 			switch (ent.getSendingType()) {
 			case ADD:
 				broker.post(IBrokerEvents.ADD_DATA, ent);
@@ -75,10 +79,10 @@ public class MessagesJob extends Job {
 		}
 		
 		
-		/*
+		
 		logger.info("Getting new Messages: " + DateFormat.getDateTimeInstance(DateFormat.LONG,
 				DateFormat.MEDIUM).format(now.getTime())+" Number of Messages: "+mesList.size());
-		*/
+		
 		
 		schedule(de.femodeling.e4.model.core.Message.MESSAGE_EXPIRATION*25);
 		return Status.OK_STATUS;
