@@ -113,4 +113,11 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="de.femodeling.e4.ui.progress"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
