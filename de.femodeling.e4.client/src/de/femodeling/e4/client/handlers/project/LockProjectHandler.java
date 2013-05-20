@@ -102,6 +102,8 @@ public class LockProjectHandler {
 		tags.add(currentProject.getLockableId());
 		
 		List<MPart> parts=modelService.findElements(app,ProjectsPart.PART_EDITOR_ID, MPart.class,tags );
+		
+		
 		for(MPart part:parts){
 			
 			part.setLabel(currentProject.getName());

@@ -9,6 +9,10 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.commands.ParameterizedCommand;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
@@ -88,7 +92,17 @@ public class ProjectEditorPart{
 	private EModelService modelService;
 	
 	@Inject
+	private EHandlerService handlerService;
+	
+	@Inject
+	private ECommandService commandService;
+	
+	@Inject
 	private MApplication app;
+	
+	@Inject
+	private IEclipseContext context;
+	
 	
 	
 	
@@ -320,6 +334,11 @@ public class ProjectEditorPart{
 			dirty.setDirty(false);
 			//currentPro.setSessionId();
 			eventBroker.post(IBrokerEvents.PROJECT_UPDATE,copyPro.getLockableId() );
+			
+			ParameterizedCommand cmd=commandService.createCommand("de.femodeling.e4.client.command.project.lock", null);
+			handlerService.executeHandler(cmd);
+			
+			
 		}
 		else{
 			MessageDialog.openError(shell, "Save project Error", "Cannot save the project");

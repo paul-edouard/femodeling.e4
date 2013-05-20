@@ -18,10 +18,6 @@ public class ProgressPart {
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		//TODO Your code here
-		//see
-		//org.eclipse.ui.internal.progress.DetailedProgressViewer
-		//org.eclipse.ui.internal.progress.ProgressAnimationItem
-		
 	}
 	
 	
